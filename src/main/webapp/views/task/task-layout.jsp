@@ -17,7 +17,9 @@
 			<div class="row">
 				<div class="col-md-12 bg-light ">
 					<button type="button" class="btn btn-secondary" data-toggle="modal"
-						data-target="#modal-signup">
+
+						data-target="#modal-task">
+
 						<i class="fa fa-plus"></i> Thêm công việc
 					</button>
 				</div>
@@ -28,17 +30,30 @@
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
+
+						<th scope="col">Tên dự án</th>
+
 						<th scope="col">Tên công việc</th>
 						<th scope="col">Người thực hiện</th>
 						<th scope="col">Ngày bắt đầu</th>
 						<th scope="col">Ngày kết thúc</th>
 						<th scope="col">Trạng thái</th>
+
+						<th scope="col">Thao tác</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="task" items="${listTask}" varStatus="loop">
 						<tr>
 							<th scope="row">${task.taskID}</th>
+
+							<c:forEach var="job" items="${listJob}" varStatus="loop">
+								<c:if test="${job.jobID == task.jobID}">
+									<td>${job.jobName}</td>
+								</c:if>
+							</c:forEach>
+
 							<td>${task.taskName }</td>
 							<c:forEach var="user" items="${listUser}" varStatus="loop">
 								<c:if test="${user.userID == task.userID}">
@@ -47,8 +62,14 @@
 							</c:forEach>
 							<td>${task.startDate }</td>
 							<td>${task.endDate }</td>
-							<td>${task.statusID }</td>
-							
+
+							<c:forEach var="status" items="${listStatus}" varStatus="loop">
+								<c:if test="${status.statusID == task.statusID}">
+									<td>${status.statusName}</td>
+								</c:if>
+							</c:forEach>
+							<td></td>
+
 						</tr>
 					</c:forEach>
 				</tbody>
