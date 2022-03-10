@@ -1,0 +1,18 @@
+<?xml version ="1.0" encoding="UTF-8" ?>
+<decorators defaultdir="/decorators">
+	<decorator name = "web" page="default-layout.jsp">
+		<pattern>/home</pattern>
+	</decorator>
+	<decorator name = "web" page="default-layout.jsp">
+		<pattern>/user</pattern>
+	</decorator>
+	<decorator name = "web" page="default-layout.jsp">
+		<pattern>/user/update-user</pattern>
+	</decorator>
+	<decorator name = "web" page="default-layout.jsp">
+		<pattern>/task</pattern>
+	</decorator>
+	<decorator name = "web" page="default-layout.jsp">
+		<pattern>/job</pattern>
+	</decorator>
+</decorators>
