@@ -35,7 +35,7 @@ public class TaskDAO {
 		
 		return tasks;
 	}
-	
+
 	public int insertTask(Task task) {
 		String query = "INSERT INTO crm_app.tasks(task_name, start_date, end_date, user_id, status_id, job_id) VALUES (?,?,?,?,?,?)";
 		

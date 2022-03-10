@@ -17,7 +17,9 @@
 			<div class="row">
 				<div class="col-md-12 bg-light ">
 					<button type="button" class="btn btn-secondary" data-toggle="modal"
+
 						data-target="#modal-job">
+
 						<i class="fa fa-plus"></i> Thêm dự án
 					</button>
 				</div>
@@ -42,6 +44,7 @@
 							<td>${job.startDate }</td>
 							<td>${job.endDate }</td>
 							<td></td>
+
 														
 						</tr>
 					</c:forEach>

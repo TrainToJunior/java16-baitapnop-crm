@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import cybersoft.javabackend.crm.dao.JobDAO;
 import cybersoft.javabackend.crm.dao.StatusDAO;
 import cybersoft.javabackend.crm.dao.TaskDAO;
@@ -17,18 +18,23 @@ import cybersoft.javabackend.crm.model.User;
 import cybersoft.javabackend.crm.util.JspConst;
 import cybersoft.javabackend.crm.util.UrlConst;
 @WebServlet (name = "taskController", urlPatterns = {UrlConst.TASK, UrlConst.INSERT_TASK, UrlConst.DELETE_TASK})
+
 public class TaskController extends HttpServlet {
 	
 	private TaskDAO taskDao = null;
 	private UserDAO userDao = null;
+
 	private StatusDAO statusDao = null;
 	private JobDAO jobDao = null;
+
 	
 	public TaskController() {
 		taskDao = new TaskDAO();
 		userDao = new UserDAO();
+
 		statusDao = new StatusDAO();
 		jobDao = new JobDAO();
+
 	}
 	
 	@Override
@@ -36,6 +42,7 @@ public class TaskController extends HttpServlet {
 			throws ServletException, IOException {
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
+
 		req.setAttribute("listStatus", statusDao.getAll());
 		req.setAttribute("listJob", jobDao.getAll());
 		

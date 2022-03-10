@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cybersoft.javabackend.crm.dao.JobDAO;
+
 import cybersoft.javabackend.crm.model.Job;
 import cybersoft.javabackend.crm.model.User;
 import cybersoft.javabackend.crm.util.JspConst;
 import cybersoft.javabackend.crm.util.UrlConst;
 
 @WebServlet(name = "jobController", urlPatterns = { UrlConst.JOB, UrlConst.DELETE_JOB, UrlConst.INSERT_JOB})
+
 public class JobController extends HttpServlet {
 	private JobDAO jobDao = null;
 	
@@ -25,12 +27,14 @@ public class JobController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+
 		resp.setCharacterEncoding("UTF-8");
+
 		
 		req.setAttribute("listJob", jobDao.getAll());
 		req.getRequestDispatcher(JspConst.JOB).forward(req, resp);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -54,3 +58,4 @@ public class JobController extends HttpServlet {
 	}
 	
 }
+
