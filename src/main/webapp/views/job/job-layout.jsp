@@ -17,9 +17,7 @@
 			<div class="row">
 				<div class="col-md-12 bg-light ">
 					<button type="button" class="btn btn-secondary" data-toggle="modal"
-
-						data-target="#modal-job">
-
+						data-target="#modal-signup">
 						<i class="fa fa-plus"></i> Thêm dự án
 					</button>
 				</div>
@@ -33,7 +31,7 @@
 						<th scope="col">Tên dự án</th>
 						<th scope="col">Người bắt đầu</th>
 						<th scope="col">Ngày kết thúc</th>
-						<th scope="col">Thao tác</th>						
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -43,8 +41,6 @@
 							<td>${job.jobName }</td>
 							<td>${job.startDate }</td>
 							<td>${job.endDate }</td>
-							<td></td>
-
 														
 						</tr>
 					</c:forEach>
