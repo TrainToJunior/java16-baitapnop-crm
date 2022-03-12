@@ -27,28 +27,31 @@ public class UserController extends HttpServlet {
 	public void init() throws ServletException {
 		userDAO = new UserDAO();
 		roleDAO = new RoleDAO();
-		
+
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArrayList<User> listUser = userDAO.getAll();
 		ArrayList<Role> listRole = roleDAO.getAll();
-		
-		req.setAttribute("listUser", listUser);
-		req.setAttribute("listRole", listRole);
 		req.setAttribute("message", message);
 		message = "";
+		req.setAttribute("listUser", listUser);
+		req.setAttribute("listRole", listRole);
 		req.getRequestDispatcher(JspConst.USER).forward(req, resp);
+		
+		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = req.getServletPath();
 		User user = new User();
+		int value ;
 		switch (path) {
+		// không thể xóa chính mình ***************
 		case UrlConst.DELETE_USER:
-			userDAO.deleteUserByID(Integer.parseInt(req.getParameter("deleteID")));
+			value = userDAO.deleteUserByID(Integer.parseInt(req.getParameter("deleteID")));
 			message = "Xóa thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
@@ -57,7 +60,7 @@ public class UserController extends HttpServlet {
 			user.setUserPassword(req.getParameter("userPassword"));
 			user.setFullName(req.getParameter("fullName"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));
-			userDAO.insertUser(user);
+			value = userDAO.insertUser(user);
 			message = "Thêm thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
@@ -67,8 +70,8 @@ public class UserController extends HttpServlet {
 			user.setUserPassword(req.getParameter("userPassword"));
 			user.setFullName(req.getParameter("fullName"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));
-			userDAO.updateUser(user);
-			message = "Cập nhật Thành công";
+			value = userDAO.updateUser(user);
+			message = "Cập nhật thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
 		default:

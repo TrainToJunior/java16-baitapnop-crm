@@ -32,7 +32,7 @@
 						<th scope="col">Họ và tên</th>
 						<th scope="col">Email</th>
 						<th scope="col">Quyền</th>
-						<th scope="col">Thao tác</th>
+						<th scope="col">${message}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,6 +64,7 @@
 									</button>
 								</form>
 								<div style="clear: both;"></div>
+							
 							</td>
 						</tr>
 					</c:forEach>
@@ -71,5 +72,7 @@
 			</table>
 		</div>
 	</div>
+	<input type="hidden" id="message" name="message" value="${message}">
+
 </body>
 </html>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import cybersoft.javabackend.crm.connection.JDBCConnection;
+
 import cybersoft.javabackend.crm.connection.MySQLConnection;
 import cybersoft.javabackend.crm.dao.UserDAO;
 import cybersoft.javabackend.crm.model.User;

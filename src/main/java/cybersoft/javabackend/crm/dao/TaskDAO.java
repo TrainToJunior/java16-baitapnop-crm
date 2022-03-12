@@ -35,26 +35,4 @@ public class TaskDAO {
 		
 		return tasks;
 	}
-
-	public int insertTask(Task task) {
-		String query = "INSERT INTO crm_app.tasks(task_name, start_date, end_date, user_id, status_id, job_id) VALUES (?,?,?,?,?,?)";
-		
-		try(Connection conn = JDBCConnection.getConnection()){
-			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setString(1, task.getTaskName());
-			statement.setString(2, task.getStartDate());
-			statement.setString(3, task.getEndDate());
-			statement.setInt(4, task.getUserID());
-			statement.setInt(5, task.getStatusID());
-			statement.setInt(6, task.getJobID());
-			
-			return statement.executeUpdate();
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		 
-		return 0;
-	}
 }
