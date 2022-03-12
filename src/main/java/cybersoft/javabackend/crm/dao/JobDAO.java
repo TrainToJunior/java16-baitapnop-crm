@@ -3,13 +3,11 @@ package cybersoft.javabackend.crm.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import cybersoft.javabackend.crm.connection.JDBCConnection;
 import cybersoft.javabackend.crm.connection.MySQLConnection;
-
 import cybersoft.javabackend.crm.model.Job;
 
 public class JobDAO {

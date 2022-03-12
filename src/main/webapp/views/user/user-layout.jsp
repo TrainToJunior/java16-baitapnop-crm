@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-md-12 bg-light ">
 					<button type="button" class="btn btn-secondary" data-toggle="modal"
-						data-target="#modal-insert">
+						data-target="#modal-user-insert">
 						<i class="fa fa-plus"></i> Thêm thành viên
 					</button>
 					
@@ -32,7 +32,7 @@
 						<th scope="col">Họ và tên</th>
 						<th scope="col">Email</th>
 						<th scope="col">Quyền</th>
-						<th scope="col">Thao tác</th>
+						<th scope="col">${message}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,18 +44,19 @@
 							<c:forEach var="role" items="${listRole}" varStatus="loop">
 								<c:if test="${user.roleID == role.roleID}">
 									<td>${role.roleName}</td>
+									 <c:set var = "roleName" value = "${role.roleName}"/>
 								</c:if>
 							</c:forEach>
 							<td>
 								<button style="float: left" type="button"
 									class="btn btn-secondary" data-toggle="modal"
-									data-target="#modal-update" data-userid="${user.userID}"
+									data-target="#modal-user-update" data-userid="${user.userID}"
 									data-fullname="${user.fullName}" data-email="${user.email}"
-									data-userpassword="${user.userPassword}">
+									data-userpassword="${user.userPassword}" data-userrolename="<c:out value = "${roleName}"/>">
 									<i class="fa fa-pen"></i>
 								</button>
 								<form
-									action="<%=request.getContextPath() + UrlConst.DELETE_USER%>"
+									action="<%=request.getContextPath() + UrlConst.USER_DELETE%>"
 									method="post" style="float: left">
 									<input type="hidden" id="deleteID" name="deleteID"
 										value="${user.userID}">
@@ -64,6 +65,7 @@
 									</button>
 								</form>
 								<div style="clear: both;"></div>
+							
 							</td>
 						</tr>
 					</c:forEach>
@@ -71,5 +73,7 @@
 			</table>
 		</div>
 	</div>
+	<input type="hidden" id="message" name="message" value="${message}">
+
 </body>
 </html>

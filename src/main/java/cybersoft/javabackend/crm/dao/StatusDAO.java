@@ -13,8 +13,8 @@ public class StatusDAO {
 		ArrayList<Status> status = new ArrayList<>();
 		
 		String query = "SELECT * from crm_app.status"; 
-		try(Connection conn = JDBCConnection.getConnection()){
-			PreparedStatement statement = conn.prepareStatement(query);
+		try(Connection connection = JDBCConnection.getConnection()){
+			PreparedStatement statement = connection.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			
 			while(result.next()) {

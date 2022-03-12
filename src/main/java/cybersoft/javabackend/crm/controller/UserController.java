@@ -16,59 +16,62 @@ import cybersoft.javabackend.crm.model.User;
 import cybersoft.javabackend.crm.util.JspConst;
 import cybersoft.javabackend.crm.util.UrlConst;
 
-@WebServlet(name = "userController", urlPatterns = { UrlConst.USER, UrlConst.INSERT_USER, UrlConst.DELETE_USER,
-		UrlConst.UPDATE_USER })
+@WebServlet(name = "userController", urlPatterns = { UrlConst.USER, UrlConst.USER_DELETE, UrlConst.USER_INSERT,
+		UrlConst.USER_UPDATE })
 public class UserController extends HttpServlet {
-	private UserDAO userDAO = null;
-	private RoleDAO roleDAO = null;
+	private UserDAO userDao = null;
+	private RoleDAO roleDao = null;
 	private String message = "";
 
 	@Override
 	public void init() throws ServletException {
-		userDAO = new UserDAO();
-		roleDAO = new RoleDAO();
-		
+		userDao = new UserDAO();
+		roleDao = new RoleDAO();
+
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArrayList<User> listUser = userDAO.getAll();
-		ArrayList<Role> listRole = roleDAO.getAll();
-		
-		req.setAttribute("listUser", listUser);
-		req.setAttribute("listRole", listRole);
+		ArrayList<User> listUser = userDao.getAll();
+		ArrayList<Role> listRole = roleDao.getAll();
 		req.setAttribute("message", message);
 		message = "";
+		req.setAttribute("listUser", listUser);
+		req.setAttribute("listRole", listRole);
 		req.getRequestDispatcher(JspConst.USER).forward(req, resp);
+		
+		
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = req.getServletPath();
 		User user = new User();
+		int value ;
 		switch (path) {
-		case UrlConst.DELETE_USER:
-			userDAO.deleteUserByID(Integer.parseInt(req.getParameter("deleteID")));
+		// không thể xóa chính mình ***************
+		case UrlConst.USER_DELETE:
+			value = userDao.deleteUserByID(Integer.parseInt(req.getParameter("deleteID")));
 			message = "Xóa thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
-		case UrlConst.INSERT_USER:
+		case UrlConst.USER_INSERT:
 			user.setEmail(req.getParameter("email"));
 			user.setUserPassword(req.getParameter("userPassword"));
 			user.setFullName(req.getParameter("fullName"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));
-			userDAO.insertUser(user);
+			value = userDao.insertUser(user);
 			message = "Thêm thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
-		case UrlConst.UPDATE_USER:
+		case UrlConst.USER_UPDATE:
 			user.setUserID(Integer.parseInt(req.getParameter("updateID")));
 			user.setEmail(req.getParameter("email"));
 			user.setUserPassword(req.getParameter("userPassword"));
 			user.setFullName(req.getParameter("fullName"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));
-			userDAO.updateUser(user);
-			message = "Cập nhật Thành công";
+			value = userDao.updateUser(user);
+			message = "Cập nhật thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
 		default:

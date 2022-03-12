@@ -1,7 +1,5 @@
 package cybersoft.javabackend.crm.model;
 
-import java.sql.Date;
-
 public class Task {
 	private int taskID;
 	private String taskName;

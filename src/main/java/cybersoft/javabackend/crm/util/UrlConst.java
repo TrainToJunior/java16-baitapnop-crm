@@ -8,13 +8,14 @@ public class UrlConst {
 	public static final String JOB = "/job";
 	public static final String USER = "/user";
 	
-  public static final String DELETE_USER = "/user/delete-user";
-	public static final String INSERT_USER = "/user/insert-user";
-	public static final String UPDATE_USER = "/user/update-user";
-
-	public static final String INSERT_JOB = "/job/insert-job";
-	public static final String DELETE_JOB = "/job/delete-job";
+	public static final String USER_DELETE = "/user/delete";
+	public static final String USER_INSERT = "/user/insert";
+	public static final String USER_UPDATE = "/user/update";
 	
-  public static final String INSERT_TASK="/task/insert-task";
-	public static final String DELETE_TASK="/task/delete-task";
-
+	public static final String JOB_INSERT = "/job/insert";
+	public static final String JOB_DELETE = "/job/delete";
+	
+	public static final String TASK_DELETE = "/task/delete";
+	public static final String TASK_INSERT = "/task/insert";
+	public static final String TASK_UPDATE = "/task/update";
+}

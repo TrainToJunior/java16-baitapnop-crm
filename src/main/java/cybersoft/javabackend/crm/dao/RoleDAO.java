@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import cybersoft.javabackend.crm.connection.MySQLConnection;
 import cybersoft.javabackend.crm.model.Role;
-import cybersoft.javabackend.crm.model.User;
+
 
 public class RoleDAO {
 	public String getRoleNameByID(int roleID) {

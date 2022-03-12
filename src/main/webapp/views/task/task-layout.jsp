@@ -12,13 +12,12 @@
 </head>
 <body>
 	<div class="container page__container">
-		<h4>Danh sách công việc </h4>
+		<h4>Danh sách công việc</h4>
 		<div class="d-flex justify-content-end">
 			<div class="row">
 				<div class="col-md-12 bg-light ">
 					<button type="button" class="btn btn-secondary" data-toggle="modal"
-
-						data-target="#modal-task">
+						data-target="#modal-task-insert">
 
 						<i class="fa fa-plus"></i> Thêm công việc
 					</button>
@@ -58,6 +57,8 @@
 							<c:forEach var="user" items="${listUser}" varStatus="loop">
 								<c:if test="${user.userID == task.userID}">
 									<td>${user.fullName}</td>
+									<c:set var = "selectUserName" value = "${user.fullName}"/>
+									<c:set var = "selectUserID" value = "${user.userID}"/>
 								</c:if>
 							</c:forEach>
 							<td>${task.startDate }</td>
@@ -68,7 +69,25 @@
 									<td>${status.statusName}</td>
 								</c:if>
 							</c:forEach>
-							<td></td>
+							<td>
+								<button style="float: left" type="button"
+									class="btn btn-secondary" data-toggle="modal"
+									data-target="#modal-task-update" data-taskid="${task.taskID}"
+									data-taskname="${task.taskName }" data-startdate="${task.startDate }"
+									data-enddate="${task.endDate }" data-userid="<c:out value = "${selectUserID}"/>" data-jobid="" data-status=""
+									data-selectuser="<c:out value = "${selectUserName}"/>">
+									<i class="fa fa-pen"></i>
+								</button>
+								<form
+									action="<%=request.getContextPath() + UrlConst.TASK_DELETE%>"
+									method="post" style="float: left">
+									<input type="hidden" id="deleteID" name="deleteID"
+										value="${task.taskID}">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-trash"></i>
+									</button>
+								</form>
+							</td>
 
 						</tr>
 					</c:forEach>
