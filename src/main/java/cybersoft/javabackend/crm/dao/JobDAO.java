@@ -24,6 +24,8 @@ public class JobDAO {
 					Job job = new Job();
 					job.setJobID(result.getInt("id"));
 					job.setJobName(result.getString("job_name"));
+					job.setJobDescription(result.getString("job_description"));
+					job.setUserCreatedID(result.getInt("user_created_id"));
 					job.setStartDate(result.getString("start_date"));
 					job.setEndDate(result.getString("end_date"));
 					projects.add(job);
@@ -37,12 +39,14 @@ public class JobDAO {
 
 	
 	public int insertJob(Job job) {
-		String query = "INSERT INTO crm_app.jobs (job_name,start_date,end_date) VALUES (?,?,?)";
+		String query = "INSERT INTO crm_app.jobs (job_name, job_description, user_created_id,start_date,end_date) VALUES (?,?,?,?,?)";
 		try (Connection connection = MySQLConnection.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, job.getJobName());
-			statement.setString(2, job.getStartDate());
-			statement.setString(3, job.getEndDate());
+			statement.setString(2, job.getJobDescription());
+			statement.setInt(3,job.getUserCreatedID());
+			statement.setString(4, job.getStartDate());
+			statement.setString(5, job.getEndDate());
 			
 			return statement.executeUpdate();
 		} catch (SQLException e) {
@@ -68,13 +72,14 @@ public class JobDAO {
 
 
 	public int updateJob(Job job, int updateID) {
-		String query = "UPDATE crm_app.jobs SET job_name = ?, start_date = ?, end_date = ? WHERE id = ? ";
+		String query = "UPDATE crm_app.jobs SET job_name = ?, job_description = ?, start_date = ?, end_date = ? WHERE id = ? ";
 		try (Connection connection = MySQLConnection.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, job.getJobName());
-			statement.setString(2, job.getStartDate());
-			statement.setString(3, job.getEndDate());
-			statement.setInt(4, updateID);
+			statement.setString(2, job.getJobDescription());
+			statement.setString(3, job.getStartDate());
+			statement.setString(4, job.getEndDate());
+			statement.setInt(5, updateID);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

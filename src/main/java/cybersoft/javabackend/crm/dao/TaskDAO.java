@@ -15,20 +15,22 @@ public class TaskDAO {
 		ArrayList<Task> tasks = new ArrayList<>();
 
 		String query = "SELECT * FROM crm_app.tasks";
-		try (Connection conn = JDBCConnection.getConnection()) {
+		try (Connection conn = JDBCConnection.getConnection()) {			
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 
 			while (result.next()) {
 				Task task = new Task();
+				
 				task.setTaskID(result.getInt("id"));
-				task.setUserID(result.getInt("user_id"));
-				task.setJobID(result.getInt("job_id"));
-				task.setStatusID(result.getInt("status_id"));
 				task.setTaskName(result.getString("task_name"));
+				task.setTaskDescription(result.getString("task_description"));
 				task.setStartDate(result.getString("start_date"));
 				task.setEndDate(result.getString("end_date"));
-
+				task.setUserID(result.getInt("user_id"));
+				task.setStatusID(result.getInt("status_id"));
+				task.setJobID(result.getInt("job_id"));
+				
 				tasks.add(task);
 			}
 		} catch (Exception e) {
@@ -39,16 +41,17 @@ public class TaskDAO {
 	}
 
 	public int insertTask(Task task) {
-		String query = "INSERT INTO crm_app.tasks(task_name, start_date, end_date, user_id, status_id, job_id) VALUES (?,?,?,?,?,?)";
+		String query = "INSERT INTO crm_app.tasks(task_name, task_description, start_date, end_date, user_id, status_id, job_id) VALUES (?,?,?,?,?,?,?)";
 
 		try (Connection conn = JDBCConnection.getConnection()) {
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, task.getTaskName());
-			statement.setString(2, task.getStartDate());
-			statement.setString(3, task.getEndDate());
-			statement.setInt(4, task.getUserID());
-			statement.setInt(5, task.getStatusID());
-			statement.setInt(6, task.getJobID());
+			statement.setString(2, task.getTaskDescription());
+			statement.setString(3, task.getStartDate());
+			statement.setString(4, task.getEndDate());
+			statement.setInt(5, task.getUserID());
+			statement.setInt(6, task.getStatusID());
+			statement.setInt(7, task.getJobID());
 
 			return statement.executeUpdate();
 
@@ -60,16 +63,17 @@ public class TaskDAO {
 	}
 
 	public int updateTask(Task task, int taskID) {
-		String query = "UPDATE crm_app.tasks SET task_name = ?, start_date = ?, end_date = ?,user_id = ?, status_id = ?, job_id = ? WHERE id = ? ";
+		String query = "UPDATE crm_app.tasks SET task_name = ?, task_description = ?, start_date = ?, end_date = ?,user_id = ?, status_id = ?, job_id = ? WHERE id = ? ";
 		try (Connection connection = MySQLConnection.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, task.getTaskName());
-			statement.setString(2, task.getStartDate());
-			statement.setString(3, task.getEndDate());
-			statement.setInt(4, task.getUserID());
-			statement.setInt(5, task.getStatusID());
-			statement.setInt(6, task.getJobID());
-			statement.setInt(7, taskID);
+			statement.setString(2, task.getTaskDescription());
+			statement.setString(3, task.getStartDate());
+			statement.setString(4, task.getEndDate());
+			statement.setInt(5, task.getUserID());
+			statement.setInt(6, task.getStatusID());
+			statement.setInt(7, task.getJobID());
+			statement.setInt(8, taskID);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

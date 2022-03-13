@@ -7,12 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cybersoft.javabackend.crm.dao.JobDAO;
 import cybersoft.javabackend.crm.dao.StatusDAO;
 import cybersoft.javabackend.crm.dao.TaskDAO;
 import cybersoft.javabackend.crm.dao.UserDAO;
 import cybersoft.javabackend.crm.model.Job;
+import cybersoft.javabackend.crm.model.User;
 import cybersoft.javabackend.crm.util.JspConst;
 import cybersoft.javabackend.crm.util.UrlConst;
 
@@ -30,14 +32,17 @@ public class JobController extends HttpServlet {
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		resp.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		User currentUser = (User) session.getAttribute("currentUser");
 		
+		req.setAttribute("currentUserID", currentUser.getUserID());
 		req.setAttribute("listJob", jobDao.getAll());
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
 		req.setAttribute("message", message);
 		message = "";
+		
 		req.getRequestDispatcher(JspConst.JOB).forward(req, resp);
 	}
 
@@ -55,6 +60,8 @@ public class JobController extends HttpServlet {
 			break;
 		case UrlConst.JOB_INSERT:
 			job.setJobName(req.getParameter("jobName"));
+			job.setJobDescription(req.getParameter("jobDescription"));
+			job.setUserCreatedID(Integer.parseInt(req.getParameter("userCreatedID")));
 			job.setStartDate(req.getParameter("startDate"));
 			job.setEndDate(req.getParameter("endDate"));
 			jobDao.insertJob(job);
@@ -63,9 +70,10 @@ public class JobController extends HttpServlet {
 			break;
 		case UrlConst.JOB_UPDATE:
 			job.setJobName(req.getParameter("jobName"));
+			job.setJobDescription(req.getParameter("jobDescription"));
 			job.setStartDate(req.getParameter("startDate"));
 			job.setEndDate(req.getParameter("endDate"));
-			jobDao.updateJob(job,Integer.parseInt(req.getParameter("updateID")) );
+			jobDao.updateJob(job,Integer.parseInt(req.getParameter("updateID")));
 			message = "Cập nhật thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.JOB);
 			break;

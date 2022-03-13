@@ -3,6 +3,7 @@ package cybersoft.javabackend.crm.model;
 public class Task {
 	private int taskID;
 	private String taskName;
+	private String taskDescription;
 	private String startDate;
 	private String endDate;
 	private int userID;
@@ -50,6 +51,12 @@ public class Task {
 	}
 	public void setJobID(int jobID) {
 		this.jobID = jobID;
+	}
+	public String getTaskDescription() {
+		return taskDescription;
+	}
+	public void setTaskDescription(String taskDescription) {
+		this.taskDescription = taskDescription;
 	}
 	
 }

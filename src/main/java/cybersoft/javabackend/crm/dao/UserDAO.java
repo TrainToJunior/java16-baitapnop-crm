@@ -19,9 +19,11 @@ public class UserDAO {
 			while (res.next()) {
 				User user = new User();
 				user.setUserID(res.getInt("id"));
-				user.setUserPassword(res.getString("user_password"));
-				user.setEmail(res.getString("email"));
 				user.setFullName(res.getString("fullname"));
+				user.setPhoneNumber(res.getString("phone_number"));
+				user.setAddress(res.getString("address"));
+				user.setEmail(res.getString("email"));
+				user.setUserPassword(res.getString("user_password"));
 				user.setRoleID(res.getInt("role_id"));
 			
 				listUser.add(user);
@@ -43,10 +45,11 @@ public class UserDAO {
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
 				user.setUserID(res.getInt("id"));
+				user.setFullName(res.getString("fullname"));
+				user.setPhoneNumber(res.getString("phone_number"));
+				user.setAddress(res.getString("address"));
 				user.setUserPassword(res.getString("user_password"));
 				user.setEmail(res.getString("email"));
-				user.setFullName(res.getString("fullname"));
-				user.setAvatar(res.getString("avatar"));
 				user.setRoleID(res.getInt("role_id"));
 				user.setPhoneNumber(res.getString("phone_number"));
 			}
@@ -71,13 +74,15 @@ public class UserDAO {
 	}
 
 	public int insertUser(User user) {
-		String query = "INSERT INTO crm_app.users (email, user_password, fullname,role_id) VALUES (?,?,?,?)";
+		String query = "INSERT INTO crm_app.users (fullname, phone_number, address, email, user_password, role_id) VALUES (?,?,?,?,?,?)";
 		try (Connection connection = MySQLConnection.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, user.getEmail());
-			statement.setString(2, user.getUserPassword());
-			statement.setString(3, user.getFullName());
-			statement.setInt(4, user.getRoleID());
+			statement.setString(1, user.getFullName());
+			statement.setString(2, user.getPhoneNumber());
+			statement.setString(3, user.getAddress());
+			statement.setString(4, user.getEmail());
+			statement.setString(5, user.getUserPassword());
+			statement.setInt(6, user.getRoleID());
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -87,14 +92,16 @@ public class UserDAO {
 	}
 	
 	public int updateUser(User user) {
-		String query = "UPDATE crm_app.users SET email = ?, user_password = ?, fullname = ?, role_id = ? WHERE id = ? ";
+		String query = "UPDATE crm_app.users SET fullname = ?, phone_number = ?, address = ?, email = ?, user_password = ?, role_id = ? WHERE id = ? ";
 		try (Connection connection = MySQLConnection.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, user.getEmail());
-			statement.setString(2, user.getUserPassword());
-			statement.setString(3, user.getFullName());
-			statement.setInt(4, user.getRoleID());
-			statement.setInt(5, user.getUserID());		
+			statement.setString(1, user.getFullName());	
+			statement.setString(2, user.getPhoneNumber());
+			statement.setString(3, user.getAddress());
+			statement.setString(4, user.getEmail());
+			statement.setString(5, user.getUserPassword());
+			statement.setInt(6, user.getRoleID());
+			statement.setInt(7, user.getUserID());		
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -112,12 +119,12 @@ public class UserDAO {
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
 				user.setUserID(res.getInt("id"));
-				user.setUserPassword(res.getString("user_password"));
-				user.setEmail(res.getString("email"));
 				user.setFullName(res.getString("fullname"));
-				user.setAvatar(res.getString("avatar"));
-				user.setRoleID(res.getInt("role_id"));
 				user.setPhoneNumber(res.getString("phone_number"));
+				user.setAddress(res.getString("address"));
+				user.setEmail(res.getString("email"));
+				user.setUserPassword(res.getString("user_password"));
+				user.setRoleID(res.getInt("role_id"));
 			}
 		} catch (SQLException e) {
 

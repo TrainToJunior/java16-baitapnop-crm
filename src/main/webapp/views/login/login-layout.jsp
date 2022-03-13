@@ -68,7 +68,7 @@
 			<div class="input-group input-group-merge">
 				<input id="email_2" type="email" name="email_2"
 					class="form-control form-control-prepended"
-					placeholder="john@doe.com">
+					placeholder="admin@gmail.com">
 				<div class="input-group-prepend">
 					<div class="input-group-text">
 						<span class="far fa-envelope"></span>
@@ -81,7 +81,7 @@
 			<div class="input-group input-group-merge">
 				<input id="password_2" type="password" name="password_2"
 					class="form-control form-control-prepended"
-					placeholder="Enter your password">
+					placeholder="1234">
 				<div class="input-group-prepend">
 					<div class="input-group-text">
 						<span class="fa fa-key"></span>

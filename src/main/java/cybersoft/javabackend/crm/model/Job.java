@@ -3,6 +3,8 @@ package cybersoft.javabackend.crm.model;
 public class Job {
 	private int jobID;
 	private String jobName;
+	private String jobDescription;
+	private int userCreatedID;
 	private String startDate;
 	private String endDate;
 	public int getJobID() {
@@ -28,6 +30,18 @@ public class Job {
 	}
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+	public String getJobDescription() {
+		return jobDescription;
+	}
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+	public int getUserCreatedID() {
+		return userCreatedID;
+	}
+	public void setUserCreatedID(int userCreatedID) {
+		this.userCreatedID = userCreatedID;
 	}
 	
 }

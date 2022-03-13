@@ -59,24 +59,26 @@ public class TaskController extends HttpServlet {
 			break;
 		case UrlConst.TASK_INSERT:
 
-			task.setTaskName(req.getParameter("taskname"));
-			task.setStartDate(req.getParameter("startdate"));
-			task.setEndDate(req.getParameter("enddate"));
-			task.setUserID(Integer.parseInt(req.getParameter("selectuser")));
-			task.setJobID(Integer.parseInt(req.getParameter("selectjob")));
-			task.setStatusID(Integer.parseInt(req.getParameter("selectstatus")));
+			task.setTaskName(req.getParameter("taskName"));
+			task.setTaskDescription(req.getParameter("taskDescription"));
+			task.setStartDate(req.getParameter("startDate"));
+			task.setEndDate(req.getParameter("endDate"));
+			task.setUserID(Integer.parseInt(req.getParameter("selectUser")));
+			task.setJobID(Integer.parseInt(req.getParameter("selectJob")));
+			task.setStatusID(Integer.parseInt(req.getParameter("selectStatus")));
 
 			taskDao.insertTask(task);
 			message = "Thêm thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.TASK);
 			break;
 		case UrlConst.TASK_UPDATE:
-			task.setTaskName(req.getParameter("taskname"));
-			task.setStartDate(req.getParameter("startdate"));
-			task.setEndDate(req.getParameter("enddate"));
-			task.setUserID(Integer.parseInt(req.getParameter("selectuser")));
-			task.setJobID(Integer.parseInt(req.getParameter("selectjob")));
-			task.setStatusID(Integer.parseInt(req.getParameter("selectstatus")));
+			task.setTaskName(req.getParameter("taskName"));
+			task.setTaskDescription(req.getParameter("taskDescription"));
+			task.setStartDate(req.getParameter("startDate"));
+			task.setEndDate(req.getParameter("endDate"));
+			task.setUserID(Integer.parseInt(req.getParameter("selectUser")));
+			task.setJobID(Integer.parseInt(req.getParameter("selectJob")));
+			task.setStatusID(Integer.parseInt(req.getParameter("selectStatus")));
 			taskDao.updateTask(task,Integer.parseInt(req.getParameter("updateID")) );
 			message = "Cập nhật thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.TASK);

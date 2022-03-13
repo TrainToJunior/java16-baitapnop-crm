@@ -54,9 +54,11 @@ public class UserController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
 		case UrlConst.USER_INSERT:
+			user.setFullName(req.getParameter("fullName"));
+			user.setPhoneNumber(req.getParameter("phoneNumber"));
+			user.setAddress(req.getParameter("address"));
 			user.setEmail(req.getParameter("email"));
 			user.setUserPassword(req.getParameter("userPassword"));
-			user.setFullName(req.getParameter("fullName"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));
 			value = userDao.insertUser(user);
 			message = "Thêm thành công";
@@ -65,6 +67,8 @@ public class UserController extends HttpServlet {
 		case UrlConst.USER_UPDATE:
 			user.setUserID(Integer.parseInt(req.getParameter("updateID")));
 			user.setEmail(req.getParameter("email"));
+			user.setPhoneNumber(req.getParameter("phoneNumber"));
+			user.setAddress(req.getParameter("address"));
 			user.setUserPassword(req.getParameter("userPassword"));
 			user.setFullName(req.getParameter("fullName"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));

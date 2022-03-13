@@ -3,10 +3,10 @@ package cybersoft.javabackend.crm.model;
 public class User {
 	private int userID;
 	private String fullName;
+	private String phoneNumber;
+	private String address;
 	private String email;
 	private String userPassword;
-	private String avatar;
-	private String phoneNumber;
 	private int roleID;
 	
 	public String getPhoneNumber() {
@@ -39,17 +39,17 @@ public class User {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public String getAvatar() {
-		return avatar;
-	}
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
 	public int getRoleID() {
 		return roleID;
 	}
 	public void setRoleID(int roleID) {
 		this.roleID = roleID;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	public String getName() {

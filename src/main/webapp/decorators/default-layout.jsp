@@ -59,6 +59,16 @@
 									placeholder="John Doe" />
 							</div>
 							<div class="form-group">
+								<label for="phoneNumber">Số điện thoại:</label> <input
+									class="form-control" type="number" id="phoneNumber" name="phoneNumber"
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="address">Địa chỉ:</label> <input
+									class="form-control" type="text" id="address" name="address"
+									placeholder="" />
+							</div>
+							<div class="form-group">
 								<label for="email">Email:</label> <input class="form-control"
 									type="email" name="email" id="email" placeholder="john@doe.com" />
 							</div>
@@ -70,7 +80,7 @@
 							</div>
 							<div class="form-group role-options">
 								<h5 id="selectRole">Quyền :</h5> <select id="selectRole"
-									name="selectRole">
+									name="selectRole" required>
 									<c:forEach var="role" items="${listRole}" varStatus="loop">
 										<option value="${role.roleID}">${role.roleName}</option>
 									</c:forEach>
@@ -114,6 +124,16 @@
 									placeholder="John Doe" />
 							</div>
 							<div class="form-group">
+								<label for="phoneNumber">Số điện thoại:</label> <input
+									class="form-control" type="number" id="phoneNumber" name="phoneNumber"
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="address">Địa chỉ:</label> <input
+									class="form-control" type="text" id="address" name="address"
+									placeholder="" />
+							</div>
+							<div class="form-group">
 								<label for="email">Email:</label> <input class="form-control"
 									type="email" name="email" id="email" placeholder="john@doe.com" />
 							</div>
@@ -125,7 +145,7 @@
 							</div>
 							<div class="form-group">
 								<label for="selectRole">Quyền:</label> <select id="selectRole"
-									name="selectRole">
+									name="selectRole" required>
 									<c:forEach var="role" items="${listRole}" varStatus="loop">
 										<option value="${role.roleID}">${role.roleName}</option>
 									</c:forEach>
@@ -169,21 +189,25 @@
 							</div>
 							<div class="form-group">
 								<label for="taskName">Tên công việc :</label> <input class="form-control"
-									type="text" id="taskName" name="taskname" required="" placeholder="" />
+									type="text" id="taskName" name="taskName" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="taskDescription">Mô tả :</label> <input class="form-control"
+									type="text" id="taskDescription" name="taskDescription" required="" placeholder="" />
 							</div>
 							<div class="form-group">
 								<label for="startDate">Ngày bắt đầu:</label> <input
-									class="form-control" type="date" name="startdate" id="startDate" required=""
+									class="form-control" type="date" name="startDate" id="startDate" required=""
 									placeholder="" />
 							</div>
 							<div class="form-group">
 								<label for="endDate">Ngày kết thúc:</label> <input
-									class="form-control" type="date" name="enddate" id="endDate" required=""
+									class="form-control" type="date" name="endDate" id="endDate" required=""
 									placeholder=""  value=""/>
 							</div>
 							<div class="form-group user-options">
 								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
-									name="selectuser" >					
+									name="selectUser" required >					
 												 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
 											<c:if test=""></c:if>
@@ -193,16 +217,15 @@
 							</div>
 							<div class="form-group job-options">
 								<label for="selectJob">Dự án: </label> <select id="selectJob"
-									name="selectjob" >									 
-									<c:forEach var="job" items="${listJob}" varStatus="loop">
-											
+									name="selectJob"  required>									 
+									<c:forEach var="job" items="${listJob}" varStatus="loop">		
 											<option value="${job.jobID}">${job.jobName}</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group status-options">
-								<label for="selectstatus">Trạng thái: </label> <select id="selectstatus"
-									name="selectstatus" >									 
+								<label for="selectStatus">Trạng thái: </label> <select id="selectStatus"
+									name="selectStatus" required >									 
 									<c:forEach var="status" items="${listStatus}" varStatus="loop">
 											
 											<option value="${status.statusID}">${status.statusName}</option>
@@ -242,21 +265,25 @@
 							method="POST">
 							<div class="form-group">
 								<label for="taskName">Tên công việc :</label> <input class="form-control"
-									type="text" id="taskName" name="taskname" required="" placeholder="" />
+									type="text" id="taskName" name="taskName" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="taskDescription">Mô tả :</label> <input class="form-control"
+									type="text" id="taskDescription" name="taskDescription" required="" placeholder="" />
 							</div>
 							<div class="form-group">
 								<label for="startDate">Ngày bắt đầu:</label> <input
-									class="form-control" type="date" name="startdate" id="startDate" required=""
+									class="form-control" type="date" name="startDate" id="startDate" required=""
 									placeholder="" />
 							</div>
 							<div class="form-group">
 								<label for="endDate">Ngày kết thúc:</label> <input
-									class="form-control" type="date" name="enddate" id="endDate" required=""
+									class="form-control" type="date" name="endDate" id="endDate" required=""
 									placeholder="" />
 							</div>
 							<div class="form-group">
 								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
-									name="selectuser" >								 
+									name="selectUser" required >								 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
 											<option value="${user.userID}">${user.fullName}</option>
 									</c:forEach>
@@ -264,7 +291,7 @@
 							</div>
 							<div class="form-group">
 								<label for="selectJob">Dự án: </label> <select id="selectJob"
-									name="selectjob" >									 
+									name="selectJob" required >									 
 									<c:forEach var="job" items="${listJob}" varStatus="loop">
 											
 											<option value="${job.jobID}">${job.jobName}</option>
@@ -272,8 +299,8 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="selectstatus">Trạng thái: </label> <select id="selectstatus"
-									name="selectstatus" >									 
+								<label for="selectStatus">Trạng thái: </label> <select id="selectStatus"
+									name="selectStatus" required >									 
 									<c:forEach var="status" items="${listStatus}" varStatus="loop">
 											
 											<option value="${status.statusID}">${status.statusName}</option>
@@ -312,11 +339,17 @@
 						<form
 							action="<%=request.getContextPath() + UrlConst.JOB_INSERT%>"
 							method="POST">
+							<h5 id="test"></h5>
+							<input type="hidden" id="userCreatedID" name="userCreatedID">
 							<div class="form-group">
 								<label for="jobName">Tên dự án :</label> <input class="form-control"
 									type="text" id="jobName" name="jobName" required="" placeholder="" />
 							</div>
 							<div class="form-group">
+								<label for="jobDescription">Mô tả :</label> <input class="form-control"
+									type="text" id="jobDescription" name="jobDescription" required="" placeholder="" />
+							</div>
+							<div class="form-group">	
 								<label for="startDate">Ngày bắt đầu:</label> <input
 									class="form-control" type="date" name="startDate" id="startDate" required=""
 									placeholder="" />
@@ -364,6 +397,13 @@
 							<div class="form-group">
 								<label for="jobName">Tên dự án :</label> <input class="form-control"
 									type="text" id="jobName" name="jobName" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="jobDescription">Mô tả :</label> <input class="form-control"
+									type="text" id="jobDescription" name="jobDescription" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<h5 id="userCreated"></h5>
 							</div>
 							<div class="form-group">
 								<label for="startDate">Ngày bắt đầu:</label> <input

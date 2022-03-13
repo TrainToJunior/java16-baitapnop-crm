@@ -3,6 +3,8 @@ $(document).on('shown.bs.modal','#modal-user-update', function (event) {
 var button = $(event.relatedTarget)
   	var userID = button.data('userid')
 	var fullName = button.data('fullname')
+	var phoneNumber = button.data('phonenumber')
+	var address = button.data('address')
 	var email = button.data('email') 
 	var userPassword = button.data('userpassword')
 	var roleID = button.data('roleid')  
@@ -11,6 +13,8 @@ var modal = $(this)
 	modal.find('#userID').text('UserID: ' + userID)
 	modal.find('#updateID').val(userID)
  	modal.find('#fullName').val(fullName)
+	modal.find('#phoneNumber').val(phoneNumber)
+	modal.find('#address').val(address)
 	modal.find('#email').val(email)
 	modal.find('#userPassword').val(userPassword)
 // Options select
@@ -25,6 +29,7 @@ $(document).on('shown.bs.modal','#modal-task-update', function (event) {
 var button = $(event.relatedTarget)
   	var taskID = button.data('taskid')
 	var taskName = button.data('taskname')
+	var taskDescription = button.data('taskdescription')
 	var startDate = button.data('startdate')
 	var endDate = button.data('enddate')
 	var userID = button.data('userid')
@@ -42,6 +47,7 @@ var modal = $(this)
 	modal.find('#taskID').text('TaskID: ' + taskID )
 	modal.find('#updateID').val(taskID)
  	modal.find('#taskName').val(taskName)
+	modal.find('#taskDescription').val(taskDescription)
 	modal.find('#startDate').val(selectStartDate)
 	modal.find('#endDate').val(selectEndDate)
 	modal.find('#optionSelectUser').val(userID)
@@ -59,6 +65,8 @@ var modal = $(this)
      .removeAttr('selected')
      .filter('[value="'+ statusID +'"]')
          .attr('selected', true)
+
+	console.log(taskDescription + taskName)
 });
 
 $(document).on('shown.bs.modal','#modal-task-insert', function () {
@@ -86,6 +94,9 @@ $(document).on('shown.bs.modal','#modal-job-update', function (event) {
 var button = $(event.relatedTarget)
   	var jobID = button.data('jobid')
 	var jobName = button.data('jobname')
+	var jobDescription = button.data('jobdescription')
+	var userCreatedID = button.data('usercreatedid')
+	var userCreatedFullName = button.data('usercreatedfullname')
 	var jobStartDate = button.data('jobstartdate') 
 	var jobEndDate = button.data('jobenddate')
 	var stringJobStartDate = jobStartDate.toString().split(' ')[0]
@@ -98,8 +109,34 @@ var button = $(event.relatedTarget)
 var modal = $(this)
 	modal.find('#jobID').text('JobID: ' + jobID)
 	modal.find('#jobName').val(jobName)
+	modal.find('#jobDescription').val(jobDescription)
+	modal.find('#userCreated').text('Người tạo: ' + userCreatedFullName + ' ID: ' + userCreatedID)
 	modal.find('#updateID').val(jobID)
 	modal.find('#startDate').val(selectJobStartDate)
 	modal.find('#endDate').val(selectJobEndDate)
 
+});
+
+$(document).on('shown.bs.modal','#modal-job-insert', function (event) {
+var button = $(event.relatedTarget)
+  	var currentUserID = button.data('currentuserid')
+	var now = new Date();
+    var month = (now.getMonth() + 1);               
+    var day = now.getDate();
+	var endMonth = month + 1;
+    if (month < 10) {
+        month = "0" + month;
+		if (endMonth < 10){
+			endMonth = "0" + endMonth;
+		}
+	}
+    if (day < 10) 
+        day = "0" + day;
+    var today = now.getFullYear() + '-' + month + '-' + day;
+	var endDate = now.getFullYear() + '-' + endMonth + '-' + day;
+var modal = $(this)
+	modal.find('#test').text(currentUserID)
+	modal.find('#userCreatedID').val(currentUserID)
+	modal.find('#startDate').val(today)
+	modal.find('#endDate').val(endDate)
 });
