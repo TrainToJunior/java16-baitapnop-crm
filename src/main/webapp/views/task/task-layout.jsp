@@ -50,6 +50,7 @@
 							<c:forEach var="job" items="${listJob}" varStatus="loop">
 								<c:if test="${job.jobID == task.jobID}">
 									<td>${job.jobName}</td>
+									<c:set var="selectJobID" value="${job.jobID}" />
 								</c:if>
 							</c:forEach>
 
@@ -57,8 +58,8 @@
 							<c:forEach var="user" items="${listUser}" varStatus="loop">
 								<c:if test="${user.userID == task.userID}">
 									<td>${user.fullName}</td>
-									<c:set var = "selectUserName" value = "${user.fullName}"/>
-									<c:set var = "selectUserID" value = "${user.userID}"/>
+									<c:set var="selectUserName" value="${user.fullName}" />
+									<c:set var="selectUserID" value="${user.userID}" />
 								</c:if>
 							</c:forEach>
 							<td>${task.startDate }</td>
@@ -67,14 +68,20 @@
 							<c:forEach var="status" items="${listStatus}" varStatus="loop">
 								<c:if test="${status.statusID == task.statusID}">
 									<td>${status.statusName}</td>
+									<c:set var="selectStatusID" value="${status.statusID}" />
 								</c:if>
 							</c:forEach>
 							<td>
 								<button style="float: left" type="button"
 									class="btn btn-secondary" data-toggle="modal"
-									data-target="#modal-task-update" data-taskid="${task.taskID}"
-									data-taskname="${task.taskName }" data-startdate="${task.startDate }"
-									data-enddate="${task.endDate }" data-userid="<c:out value = "${selectUserID}"/>" data-jobid="" data-status=""
+									data-target="#modal-task-update" 
+									data-taskid="${task.taskID}"
+									data-taskname="${task.taskName }"
+									data-startdate="${task.startDate }"
+									data-enddate="${task.endDate }"
+									data-userid="<c:out value = "${selectUserID}"/>"
+									data-jobid="<c:out value = "${selectJobID}"/>"
+									data-statusid="<c:out value = "${selectStatusID}"/>"
 									data-selectuser="<c:out value = "${selectUserName}"/>">
 									<i class="fa fa-pen"></i>
 								</button>
@@ -95,5 +102,6 @@
 			</table>
 		</div>
 	</div>
+	<input type="hidden" id="message" name="message" value="${message}">
 </body>
 </html>

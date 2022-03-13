@@ -33,8 +33,8 @@
 
 	<jsp:include page="<%=JspConst.BOOTER%>"></jsp:include>
 
-	<!-- Update Modal -->
-	<div id="modal-update" class="modal fade" role="dialog"
+	<!-- USER-UPDATE Modal -->
+	<div id="modal-user-update" class="modal fade" role="dialog"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -47,7 +47,7 @@
 							</a>
 						</div>
 						<form
-							action="<%=request.getContextPath() + UrlConst.UPDATE_USER%>"
+							action="<%=request.getContextPath() + UrlConst.USER_UPDATE%>"
 							method="POST">
 							<div class="form-group">
 								<h5 id="userID">UserID :</h5>
@@ -64,11 +64,12 @@
 							</div>
 							<div class="form-group">
 								<label for="userPassword">Mật khẩu:</label> <input
+									type ="password"
 									class="form-control" name="userPassword" id="userPassword"
 									placeholder="Enter your password" />
 							</div>
 							<div class="form-group">
-								<label for="selectRole">Quyền:</label> <select id="selectRole"
+								<h5 id="selectRole">Quyền :</h5> <select id="selectRole"
 									name="selectRole">
 									<c:forEach var="role" items="${listRole}" varStatus="loop">
 										<option value="${role.roleID}">${role.roleName}</option>
@@ -76,8 +77,7 @@
 								</select>
 							</div>
 							<div class="form-group text-center">
-								<button class="btn btn-primary" type="submit">Cập
-									nhật</button>
+								<button class="btn btn-primary" type="submit">Cập nhật</button>
 							</div>
 						</form>
 
@@ -91,8 +91,8 @@
 	</div>
 	<!-- // END .modal -->
 
-	<!-- INSERT Modal -->
-	<div id="modal-insert" class="modal fade" tabindex="-1" role="dialog"
+	<!-- USER-INSERT Modal -->
+	<div id="modal-user-insert" class="modal fade" tabindex="-1" role="dialog"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -106,7 +106,7 @@
 						</div>
 
 						<form
-							action="<%=request.getContextPath() + UrlConst.INSERT_USER%>"
+							action="<%=request.getContextPath() + UrlConst.USER_INSERT%>"
 							method="POST">
 							<div class="form-group">
 								<label for="fullName">Họ và tên:</label> <input
@@ -145,7 +145,198 @@
 	</div>
 	<!-- // END .modal -->
 	
+	<!-- TASK-UPDATE Modal -->
+	<div id="modal-task-update" class="modal fade" tabindex="-1" role="dialog"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="px-3">
+						<div class="d-flex justify-content-center mt-2 mb-4 navbar-light">
+							<a href="dashboard.html" class="navbar-brand"
+								style="min-width: 0"> <img class="navbar-brand-icon"
+								src="assets/images/logo.png" width="250" alt="Cybersoft">
+							</a>
+						</div>
+
+						<form
+							action="<%=request.getContextPath() + UrlConst.TASK_UPDATE%>"
+							method="POST">
+							<div class="form-group">
+								<h5 id="taskID">TaskID :</h5>
+
+								<input type="hidden" id="updateID" name="updateID">
+							</div>
+							<div class="form-group">
+								<label for="taskName">Tên công việc :</label> <input class="form-control"
+									type="text" id="taskName" name="taskname" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="startDate">Ngày bắt đầu:</label> <input
+									class="form-control" type="date" name="startdate" id="startDate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="endDate">Ngày kết thúc:</label> <input
+									class="form-control" type="date" name="enddate" id="endDate" required=""
+									placeholder=""  value=""/>
+							</div>
+							<div class="form-group">
+								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
+									name="selectuser" >					
+									<option value="" id="optionSelectUser" selected></option>				 
+									<c:forEach var="user" items="${listUser}" varStatus="loop">
+											<option value="${user.userID}">${user.fullName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="selectJob">Dự án: </label> <select id="selectJob"
+									name="selectjob" >									 
+									<c:forEach var="job" items="${listJob}" varStatus="loop">
+											
+											<option value="${job.jobID}">${job.jobName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="selectstatus">Trạng thái: </label> <select id="selectstatus"
+									name="selectstatus" >									 
+									<c:forEach var="status" items="${listStatus}" varStatus="loop">
+											
+											<option value="${status.statusID}">${status.statusName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group text-center">
+								<button class="btn btn-primary" type="submit">Cập nhật</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- // END .modal-body -->
+			</div>
+			<!-- // END .modal-content -->
+		</div>
+		<!-- // END .modal-dialog -->
+	</div>
+	<!-- // END .modal -->
+	
+	<!-- TASK-INSERT Modal -->
+	<div id="modal-task-insert" class="modal fade" tabindex="-1" role="dialog"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="px-3">
+						<div class="d-flex justify-content-center mt-2 mb-4 navbar-light">
+							<a href="dashboard.html" class="navbar-brand"
+								style="min-width: 0"> <img class="navbar-brand-icon"
+								src="assets/images/logo.png" width="250" alt="Cybersoft">
+							</a>
+						</div>
+
+						<form
+							action="<%=request.getContextPath() + UrlConst.TASK_INSERT%>"
+							method="POST">
+							<div class="form-group">
+								<label for="taskName">Tên công việc :</label> <input class="form-control"
+									type="text" id="taskName" name="taskname" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="startDate">Ngày bắt đầu:</label> <input
+									class="form-control" type="date" name="startdate" id="startDate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="endDate">Ngày kết thúc:</label> <input
+									class="form-control" type="date" name="enddate" id="endDate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
+									name="selectuser" >								 
+									<c:forEach var="user" items="${listUser}" varStatus="loop">
+											<option value="${user.userID}">${user.fullName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="selectJob">Dự án: </label> <select id="selectJob"
+									name="selectjob" >									 
+									<c:forEach var="job" items="${listJob}" varStatus="loop">
+											
+											<option value="${job.jobID}">${job.jobName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="selectstatus">Trạng thái: </label> <select id="selectstatus"
+									name="selectstatus" >									 
+									<c:forEach var="status" items="${listStatus}" varStatus="loop">
+											
+											<option value="${status.statusID}">${status.statusName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group text-center">
+								<button class="btn btn-primary" type="submit">Thêm mới</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- // END .modal-body -->
+			</div>
+			<!-- // END .modal-content -->
+		</div>
+		<!-- // END .modal-dialog -->
+	</div>
+	<!-- // END .modal -->
 	
 	
+	<!-- JOB-INSERT Modal -->
+	<div id="modal-job-insert" class="modal fade" tabindex="-1" role="dialog"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="px-3">
+						<div class="d-flex justify-content-center mt-2 mb-4 navbar-light">
+							<a href="dashboard.html" class="navbar-brand"
+								style="min-width: 0"> <img class="navbar-brand-icon"
+								src="assets/images/logo.png" width="250" alt="Cybersoft">
+							</a>
+						</div>
+
+						<form
+							action="<%=request.getContextPath() + UrlConst.JOB_INSERT%>"
+							method="POST">
+							<div class="form-group">
+								<label for="jobname">Tên dự án :</label> <input class="form-control"
+									type="text" id="jobname" name="jobname" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="startdate">Ngày bắt đầu:</label> <input
+									class="form-control" type="date" name="startdate" id="startdate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="enddate">Ngày kết thúc:</label> <input
+									class="form-control" type="date" name="enddate" id="enddate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group text-center">
+								<button class="btn btn-primary" type="submit">Thêm mới</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- // END .modal-body -->
+			</div>
+			<!-- // END .modal-content -->
+		</div>
+		<!-- // END .modal-dialog -->
+	</div>
+	<!-- // END .modal -->
 </body>
 </html>

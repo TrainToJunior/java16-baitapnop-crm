@@ -51,4 +51,34 @@ public class JobDAO {
 		}
 		return 0;
 	}
+
+
+	public int deleteJobByID(int deleteID) {
+		String query = "DELETE FROM crm_app.jobs WHERE id = ?";
+		try (Connection connection = MySQLConnection.getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, deleteID);
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
+	public int updateJob(Job job, int updateID) {
+		String query = "UPDATE crm_app.jobs SET job_name = ?, start_date = ?, end_date = ? WHERE id = ? ";
+		try (Connection connection = MySQLConnection.getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, job.getJobName());
+			statement.setString(2, job.getStartDate());
+			statement.setString(3, job.getEndDate());
+			statement.setInt(4, updateID);
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

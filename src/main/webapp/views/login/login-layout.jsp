@@ -89,8 +89,10 @@
 				</div>
 			</div>
 			<button class="btn btn-primary mb-5" type="submit">Login</button>
-			<br>
+			<br> <input type="hidden" id="message" name="message"
+				value="Xin chào!">
 		</form>
+
 	</div>
 
 

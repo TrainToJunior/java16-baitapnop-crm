@@ -47,7 +47,7 @@
 <script src="<c:url value="/assets/js/page.dashboard.js" />"></script>
 
 <!-- Jquery Modal -->
-<script src="<c:url value="/assets/js/account.js" />"></script>
+<script src="<c:url value="/assets/js/modal.js" />"></script>
 
 <!-- Alert -->
 <script src="<c:url value="/assets/js/alert.js" />"></script>

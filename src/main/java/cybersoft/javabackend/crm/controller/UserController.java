@@ -32,12 +32,10 @@ public class UserController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArrayList<User> listUser = userDao.getAll();
-		ArrayList<Role> listRole = roleDao.getAll();
 		req.setAttribute("message", message);
+		req.setAttribute("listUser", userDao.getAll());
+		req.setAttribute("listRole", roleDao.getAll());
 		message = "";
-		req.setAttribute("listUser", listUser);
-		req.setAttribute("listRole", listRole);
 		req.getRequestDispatcher(JspConst.USER).forward(req, resp);
 		
 		

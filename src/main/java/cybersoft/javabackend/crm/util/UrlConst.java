@@ -12,8 +12,9 @@ public class UrlConst {
 	public static final String USER_INSERT = "/user/insert";
 	public static final String USER_UPDATE = "/user/update";
 	
-	public static final String JOB_INSERT = "/job/insert";
 	public static final String JOB_DELETE = "/job/delete";
+	public static final String JOB_INSERT = "/job/insert";
+	public static final String JOB_UPDATE = "/job/update";
 	
 	public static final String TASK_DELETE = "/task/delete";
 	public static final String TASK_INSERT = "/task/insert";

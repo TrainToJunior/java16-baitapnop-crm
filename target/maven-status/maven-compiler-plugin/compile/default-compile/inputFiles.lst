@@ -13,6 +13,7 @@ E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\contro
 E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\dao\UserDAO.java
 E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\controller\LoginController.java
 E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\model\Task.java
+E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\dao\StatusDAO.java
 E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\controller\JobController.java
 E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\filter\LayoutFilter.java
 E:\workspace\java16-baitapnop-crm\src\main\java\cybersoft\javabackend\crm\filter\AuthFilter.java

@@ -68,7 +68,7 @@
 									class="form-control" name="userPassword" id="userPassword"
 									placeholder="Enter your password" />
 							</div>
-							<div class="form-group">
+							<div class="form-group role-options">
 								<h5 id="selectRole">Quyền :</h5> <select id="selectRole"
 									name="selectRole">
 									<c:forEach var="role" items="${listRole}" varStatus="loop">
@@ -119,6 +119,7 @@
 							</div>
 							<div class="form-group">
 								<label for="userPassword">Mật khẩu:</label> <input
+									type ="password"
 									class="form-control" name="userPassword" id="userPassword"
 									placeholder="Enter your password" />
 							</div>
@@ -164,7 +165,6 @@
 							method="POST">
 							<div class="form-group">
 								<h5 id="taskID">TaskID :</h5>
-
 								<input type="hidden" id="updateID" name="updateID">
 							</div>
 							<div class="form-group">
@@ -181,16 +181,17 @@
 									class="form-control" type="date" name="enddate" id="endDate" required=""
 									placeholder=""  value=""/>
 							</div>
-							<div class="form-group">
+							<div class="form-group user-options">
 								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
 									name="selectuser" >					
-									<option value="" id="optionSelectUser" selected></option>				 
+												 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
+											<c:if test=""></c:if>
 											<option value="${user.userID}">${user.fullName}</option>
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group">
+							<div class="form-group job-options">
 								<label for="selectJob">Dự án: </label> <select id="selectJob"
 									name="selectjob" >									 
 									<c:forEach var="job" items="${listJob}" varStatus="loop">
@@ -199,7 +200,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group">
+							<div class="form-group status-options">
 								<label for="selectstatus">Trạng thái: </label> <select id="selectstatus"
 									name="selectstatus" >									 
 									<c:forEach var="status" items="${listStatus}" varStatus="loop">
@@ -312,21 +313,70 @@
 							action="<%=request.getContextPath() + UrlConst.JOB_INSERT%>"
 							method="POST">
 							<div class="form-group">
-								<label for="jobname">Tên dự án :</label> <input class="form-control"
-									type="text" id="jobname" name="jobname" required="" placeholder="" />
+								<label for="jobName">Tên dự án :</label> <input class="form-control"
+									type="text" id="jobName" name="jobName" required="" placeholder="" />
 							</div>
 							<div class="form-group">
-								<label for="startdate">Ngày bắt đầu:</label> <input
-									class="form-control" type="date" name="startdate" id="startdate" required=""
+								<label for="startDate">Ngày bắt đầu:</label> <input
+									class="form-control" type="date" name="startDate" id="startDate" required=""
 									placeholder="" />
 							</div>
 							<div class="form-group">
 								<label for="enddate">Ngày kết thúc:</label> <input
-									class="form-control" type="date" name="enddate" id="enddate" required=""
+									class="form-control" type="date" name="endDate" id="endDate" required=""
 									placeholder="" />
 							</div>
 							<div class="form-group text-center">
 								<button class="btn btn-primary" type="submit">Thêm mới</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- // END .modal-body -->
+			</div>
+			<!-- // END .modal-content -->
+		</div>
+		<!-- // END .modal-dialog -->
+	</div>
+	<!-- // END .modal -->
+	
+	<!-- JOB-UPDATE Modal -->
+	<div id="modal-job-update" class="modal fade" tabindex="-1" role="dialog"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="px-3">
+						<div class="d-flex justify-content-center mt-2 mb-4 navbar-light">
+							<a href="dashboard.html" class="navbar-brand"
+								style="min-width: 0"> <img class="navbar-brand-icon"
+								src="assets/images/logo.png" width="250" alt="Cybersoft">
+							</a>
+						</div>
+
+						<form
+							action="<%=request.getContextPath() + UrlConst.JOB_UPDATE%>"
+							method="POST">
+							<div class="form-group">
+								<h5 id="jobID">JobID :</h5>
+								<input type="hidden" id="updateID" name="updateID">
+							</div>
+							<div class="form-group">
+								<label for="jobName">Tên dự án :</label> <input class="form-control"
+									type="text" id="jobName" name="jobName" required="" placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="startDate">Ngày bắt đầu:</label> <input
+									class="form-control" type="date" name="startDate" id="startDate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group">
+								<label for="endDate">Ngày kết thúc:</label> <input
+									class="form-control" type="date" name="endDate" id="endDate" required=""
+									placeholder="" />
+							</div>
+							<div class="form-group text-center">
+								<button class="btn btn-primary" type="submit">Cập nhật</button>
 							</div>
 						</form>
 					</div>

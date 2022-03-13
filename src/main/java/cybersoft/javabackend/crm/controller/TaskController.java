@@ -22,10 +22,11 @@ public class TaskController extends HttpServlet {
 
 	private TaskDAO taskDao = null;
 	private UserDAO userDao = null;
-
 	private StatusDAO statusDao = null;
 	private JobDAO jobDao = null;
 
+	private String message = "";
+	
 	@Override
 	public void init() throws ServletException {
 		taskDao = new TaskDAO();
@@ -38,10 +39,10 @@ public class TaskController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
-
 		req.setAttribute("listStatus", statusDao.getAll());
 		req.setAttribute("listJob", jobDao.getAll());
-
+		req.setAttribute("message", message);
+		message = "";
 		req.getRequestDispatcher(JspConst.TASK).forward(req, resp);
 	}
 
@@ -53,6 +54,7 @@ public class TaskController extends HttpServlet {
 		switch (path) {
 		case UrlConst.TASK_DELETE:
 			taskDao.deleteTaskByID(Integer.parseInt(req.getParameter("deleteID")));
+			message = "Xóa thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.TASK);
 			break;
 		case UrlConst.TASK_INSERT:
@@ -65,7 +67,7 @@ public class TaskController extends HttpServlet {
 			task.setStatusID(Integer.parseInt(req.getParameter("selectstatus")));
 
 			taskDao.insertTask(task);
-
+			message = "Thêm thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.TASK);
 			break;
 		case UrlConst.TASK_UPDATE:
@@ -76,6 +78,7 @@ public class TaskController extends HttpServlet {
 			task.setJobID(Integer.parseInt(req.getParameter("selectjob")));
 			task.setStatusID(Integer.parseInt(req.getParameter("selectstatus")));
 			taskDao.updateTask(task,Integer.parseInt(req.getParameter("updateID")) );
+			message = "Cập nhật thành công";
 			resp.sendRedirect(req.getContextPath() + UrlConst.TASK);
 			break;
 		default:

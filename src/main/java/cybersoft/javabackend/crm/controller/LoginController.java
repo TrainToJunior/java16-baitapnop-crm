@@ -19,7 +19,6 @@ import cybersoft.javabackend.crm.util.UrlConst;
 @WebServlet(name = "loginController", urlPatterns = UrlConst.LOGIN)
 public class LoginController extends HttpServlet {
 	private UserDAO userDao = null;
-	
 	@Override
 	public void init() throws ServletException {
 		userDao = new UserDAO();

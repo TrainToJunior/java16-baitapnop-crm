@@ -44,7 +44,7 @@
 							<c:forEach var="role" items="${listRole}" varStatus="loop">
 								<c:if test="${user.roleID == role.roleID}">
 									<td>${role.roleName}</td>
-									 <c:set var = "roleName" value = "${role.roleName}"/>
+									 <c:set var = "roleID" value = "${user.roleID}"/>
 								</c:if>
 							</c:forEach>
 							<td>
@@ -52,7 +52,7 @@
 									class="btn btn-secondary" data-toggle="modal"
 									data-target="#modal-user-update" data-userid="${user.userID}"
 									data-fullname="${user.fullName}" data-email="${user.email}"
-									data-userpassword="${user.userPassword}" data-userrolename="<c:out value = "${roleName}"/>">
+									data-userpassword="${user.userPassword}" data-roleid="<c:out value = "${roleID}"/>">
 									<i class="fa fa-pen"></i>
 								</button>
 								<form
