@@ -38,7 +38,6 @@ var button = $(event.relatedTarget)
 	var userID = button.data('userid')
 	var jobID = button.data('jobid')
 	var statusID = button.data('statusid')
-	var userName = button.data('selectuser')
 	var stringStartDate = startDate.toString().split(' ')[0]
 	var stringEndDate = endDate.toString().split(' ')[0]
 	var selectStartDate = new Date();
@@ -53,8 +52,6 @@ var modal = $(this)
 	modal.find('#taskDescription').val(taskDescription)
 	modal.find('#startDate').val(selectStartDate)
 	modal.find('#endDate').val(selectEndDate)
-	modal.find('#optionSelectUser').val(userID)
-	modal.find('#optionSelectUser').text(userName)	
 // Options select
 	$('.user-options option')
      .removeAttr('selected')

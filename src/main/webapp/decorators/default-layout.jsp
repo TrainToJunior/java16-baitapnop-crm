@@ -207,8 +207,7 @@
 							</div>
 							<div class="form-group user-options">
 								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
-									name="selectUser" required >					
-												 
+									name="selectUser" required >									 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
 											<option value="${user.userID}" class="${user.roleID}">${user.fullName}</option>
 									</c:forEach>

@@ -25,6 +25,7 @@ public class JobController extends HttpServlet {
 	private TaskDAO taskDao = null;
 	private UserDAO userDao = null;
 	private String message = "";
+	private String error = "";
 	@Override
 	public void init() throws ServletException {
 		jobDao = new JobDAO();
@@ -46,8 +47,9 @@ public class JobController extends HttpServlet {
 		req.setAttribute("roleLeader", AuthFilter.ROLE_LEADER);
 		req.setAttribute("roleMember", AuthFilter.ROLE_MEMBER);
 		req.setAttribute("message", message);
+		req.setAttribute("error", error);
 		message = "";
-		
+		error = "";
 		req.getRequestDispatcher(JspConst.JOB).forward(req, resp);
 	}
 
@@ -60,8 +62,12 @@ public class JobController extends HttpServlet {
 		Job job = new Job();
 		switch (path) {
 		case UrlConst.JOB_DELETE:
-			jobDao.deleteJobByID(Integer.parseInt(req.getParameter("deleteID")));
-			message = "Xóa thành công";
+			if(jobDao.deleteJobByID(Integer.parseInt(req.getParameter("deleteID")))==AuthFilter.SUCCESS_DAO_CODE) {				
+				message = "Xóa thành công";
+			}else {
+				message = "Xóa thành công";
+				error = "true";
+			}
 			resp.sendRedirect(req.getContextPath() + UrlConst.JOB);
 			
 			break;
@@ -71,22 +77,30 @@ public class JobController extends HttpServlet {
 			job.setUserCreatedID(currentUser.getUserID());
 			job.setStartDate(req.getParameter("startDate"));
 			job.setEndDate(req.getParameter("endDate"));
-			jobDao.insertJob(job);
-			message = "Thêm thành công";
+			if(jobDao.insertJob(job) == AuthFilter.SUCCESS_DAO_CODE) {
+				message = "Thêm thành công";				
+			}else {
+				message = "Thêm không thành công";				
+				error = "true";
+			}
 			resp.sendRedirect(req.getContextPath() + UrlConst.JOB);
 			break;
-		case UrlConst.JOB_UPDATE:
-			
+		case UrlConst.JOB_UPDATE:	
 			job.setJobName(req.getParameter("jobName"));
 			job.setJobDescription(req.getParameter("jobDescription"));
 			job.setUserCreatedID(currentUser.getUserID());
 			job.setStartDate(req.getParameter("startDate"));
 			job.setEndDate(req.getParameter("endDate"));
-			jobDao.updateJob(job,Integer.parseInt(req.getParameter("updateID")));
-			message = "Cập nhật thành công";
+			if(jobDao.updateJob(job,Integer.parseInt(req.getParameter("updateID")))==AuthFilter.SUCCESS_DAO_CODE) {
+				message = "Cập nhật thành công";				
+			}else {
+				message = "Cập nhật không thành công";
+				error = "true";
+			}
 			resp.sendRedirect(req.getContextPath() + UrlConst.JOB);
 			break;
 		default:
+			resp.sendRedirect(req.getContextPath() + JspConst.ROLE);
 			break;
 		}
 	}

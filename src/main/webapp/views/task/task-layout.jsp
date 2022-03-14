@@ -145,7 +145,7 @@
 													data-userid="<c:out value = "${selectUserID}"/>"
 													data-jobid="<c:out value = "${selectJobID}"/>"
 													data-statusid="<c:out value = "${selectStatusID}"/>"
-													data-selectuser="<c:out value = "${selectUserName}"/>">
+													>
 													<i class="fa fa-pen"></i>
 												</button> 
 												<c:if test="${currentUser.roleID != roleMember}">
