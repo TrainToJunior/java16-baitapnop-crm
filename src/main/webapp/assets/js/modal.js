@@ -27,7 +27,9 @@ var modal = $(this)
 $(document).on('shown.bs.modal','#modal-task-update', function (event) {
 //Get and set value
 var button = $(event.relatedTarget)
-  	var taskID = button.data('taskid')
+	var currentUserRoleID = $('#currentUserRoleID').val();
+	var roleMember = $('#roleMember').val();
+	var taskID = button.data('taskid')
 	var taskName = button.data('taskname')
 	var taskDescription = button.data('taskdescription')
 	var startDate = button.data('startdate')
@@ -66,7 +68,15 @@ var modal = $(this)
      .filter('[value="'+ statusID +'"]')
          .attr('selected', true)
 
-	console.log(taskDescription + taskName)
+	if (currentUserRoleID == roleMember) {
+		$('.form-group input').attr('readonly', true)
+		$('.user-options option:not(:selected)').attr('disabled', true)
+		$('.job-options option:not(:selected)').attr('disabled', true)
+	}else{
+		$('.form-group input').attr('readonly', false);
+		$('.user-options option)').attr('disabled', false);
+		$('.job-options option').attr('disabled', false);
+	}
 });
 
 $(document).on('shown.bs.modal','#modal-task-insert', function () {
@@ -117,9 +127,7 @@ var modal = $(this)
 
 });
 
-$(document).on('shown.bs.modal','#modal-job-insert', function (event) {
-var button = $(event.relatedTarget)
-  	var currentUserID = button.data('currentuserid')
+$(document).on('shown.bs.modal','#modal-job-insert', function () {
 	var now = new Date();
     var month = (now.getMonth() + 1);               
     var day = now.getDate();
@@ -135,8 +143,6 @@ var button = $(event.relatedTarget)
     var today = now.getFullYear() + '-' + month + '-' + day;
 	var endDate = now.getFullYear() + '-' + endMonth + '-' + day;
 var modal = $(this)
-	modal.find('#test').text(currentUserID)
-	modal.find('#userCreatedID').val(currentUserID)
 	modal.find('#startDate').val(today)
 	modal.find('#endDate').val(endDate)
 });

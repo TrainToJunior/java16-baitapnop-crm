@@ -339,7 +339,6 @@
 						<form
 							action="<%=request.getContextPath() + UrlConst.JOB_INSERT%>"
 							method="POST">
-							<h5 id="test"></h5>
 							<input type="hidden" id="userCreatedID" name="userCreatedID">
 							<div class="form-group">
 								<label for="jobName">Tên dự án :</label> <input class="form-control"
@@ -402,9 +401,7 @@
 								<label for="jobDescription">Mô tả :</label> <input class="form-control"
 									type="text" id="jobDescription" name="jobDescription" required="" placeholder="" />
 							</div>
-							<div class="form-group">
-								<h5 id="userCreated"></h5>
-							</div>
+							
 							<div class="form-group">
 								<label for="startDate">Ngày bắt đầu:</label> <input
 									class="form-control" type="date" name="startDate" id="startDate" required=""

@@ -72,14 +72,15 @@ public class JobDAO {
 
 
 	public int updateJob(Job job, int updateID) {
-		String query = "UPDATE crm_app.jobs SET job_name = ?, job_description = ?, start_date = ?, end_date = ? WHERE id = ? ";
+		String query = "UPDATE crm_app.jobs SET job_name = ?, job_description = ?, user_created_id = ?, start_date = ?, end_date = ? WHERE id = ? ";
 		try (Connection connection = MySQLConnection.getConnection()) {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, job.getJobName());
 			statement.setString(2, job.getJobDescription());
-			statement.setString(3, job.getStartDate());
-			statement.setString(4, job.getEndDate());
-			statement.setInt(5, updateID);
+			statement.setInt(3,job.getUserCreatedID());
+			statement.setString(4, job.getStartDate());
+			statement.setString(5, job.getEndDate());
+			statement.setInt(6, updateID);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

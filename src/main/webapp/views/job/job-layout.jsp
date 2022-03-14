@@ -19,7 +19,7 @@
 					<div class="col-md-12 bg-light ">
 						<button type="button" class="btn btn-secondary"
 							data-toggle="modal" data-target="#modal-job-insert"
-							data-currentuserid="${currentUserID}">
+							data-currentuserid="${currentUser.userID}">
 
 							<i class="fa fa-plus"></i> Thêm dự án
 						</button>
@@ -31,7 +31,7 @@
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
-							<th scope="col">Tên dự án</th>
+							<th scope="col">Dự án</th>
 							<th scope="col">Mô tả</th>
 							<th scope="col">Người tạo</th>
 							<th scope="col">Người tham gia</th>
@@ -51,8 +51,6 @@
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
 											<c:if test="${user.userID == job.userCreatedID}">
 												${user.fullName}
-												<c:set var="userCreatedFullName" value="${user.fullName}" />
-												<c:set var="userCreatedID" value="${user.userID}" />
 												<c:set var="foundUser" value="true" />
 											</c:if>
 									</c:forEach>
@@ -64,15 +62,18 @@
 									<c:forEach var="task" items="${listTask}"
 										varStatus="loop">
 										<c:if test="${job.jobID == task.jobID}">
+											<c:set var="foundTask" value="true" />
+											<c:set var="foundTaskUser" value="false" />
 											<c:forEach var="user" items="${listUser}" varStatus="loop">
 												<c:if test="${task.userID == user.userID}">
-													${user.fullName}<br />
-													<c:set var="foundTask" value="true" />
+													${user.fullName}<br/>
+													<c:set var="foundTaskUser" value="true" />		
 												</c:if>
 											</c:forEach>
 										</c:if>
 									</c:forEach>
-									<c:if test="${foundTask eq 'false'}"> <span style="color:red">Dự án chưa có công việc</span></c:if>
+									<c:if test="${foundTask eq 'false'}"> <span style="color:red">Dự án chưa có công việc<br/></span></c:if>
+									<c:if test="${foundTaskUser eq 'false'}"> <span style="color:red">Có công việc chưa phân công người làm</span></c:if>
 								</td>
 								<td>${job.startDate }</td>
 								<td>${job.endDate }</td>
@@ -82,8 +83,6 @@
 										data-target="#modal-job-update" data-jobid="${job.jobID}"
 										data-jobname="${job.jobName}"
 										data-jobdescription="${job.jobDescription}"
-										data-usercreatedid="${userCreatedID}"
-										data-usercreatedfullname="${userCreatedFullName}"
 										data-jobstartdate="${job.startDate}"
 										data-jobenddate="${job.endDate }">
 										<i class="fa fa-pen"></i>
@@ -107,5 +106,9 @@
 		</div>
 	</div>
 	<input type="hidden" id="message" name="message" value="${message}">
+	<input type="hidden" id="currentUserRoleID" name="currentUserRoleID" value="${currentUser.roleID}">
+	<input type="hidden" id="roleAdmin" name="roleAdmin" value="${roleAdmin}">
+	<input type="hidden" id="roleLeader" name="roleLeader" value="${roleLeader}">
+	<input type="hidden" id="roleMember" name="roleMember" value="${roleMember}">
 </body>
 </html>

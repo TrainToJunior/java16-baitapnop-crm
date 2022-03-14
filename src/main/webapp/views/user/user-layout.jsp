@@ -11,13 +11,13 @@
 <title>Home</title>
 </head>
 <body>
-	<div class="container-fluid page__container">
+	<div class="container-fluid page__container user-container">
 		<div style="padding-left: 200px; padding-right: 200px">
 			<h4>Danh sách thành viên</h4>
 			<div class="d-flex justify-content-end">
 				<div class="row">
 					<div class="col-md-12 bg-light ">
-						<button type="button" class="btn btn-secondary"
+						<button id="addUser" type="button" class="btn btn-secondary"
 							data-toggle="modal" data-target="#modal-user-insert">
 							<i class="fa fa-plus"></i> Thêm thành viên
 						</button>
@@ -53,7 +53,8 @@
 									</c:if>
 								</c:forEach>
 								<td>
-									<button style="float: left" type="button"
+									<div id = "hideButton">
+									<button id="updateUser" style="float: left" type="button"
 										class="btn btn-secondary btn-sm" data-toggle="modal"
 										data-target="#modal-user-update" data-userid="${user.userID}"
 										data-fullname="${user.fullName}" data-email="${user.email}"
@@ -68,11 +69,12 @@
 										method="post" style="float: left">
 										<input type="hidden" id="deleteID" name="deleteID"
 											value="${user.userID}">
-										<button type="submit" class="btn btn-primary btn-sm">
+										<button id="deleteUser" type="submit" class="btn btn-primary btn-sm">
 											<i class="fa fa-trash"></i>
 										</button>
 									</form>
 									<div style="clear: both;"></div>
+									</div>
 								</td>
 							</tr>
 						</c:forEach>
@@ -82,6 +84,9 @@
 		</div>
 	</div>
 	<input type="hidden" id="message" name="message" value="${message}">
-
+	<input type="hidden" id="currentUserRoleID" name="currentUserRoleID" value="${currentUser.roleID}">
+	<input type="hidden" id="roleAdmin" name="roleAdmin" value="${roleAdmin}">
+	<input type="hidden" id="roleLeader" name="roleLeader" value="${roleLeader}">
+	<input type="hidden" id="roleMember" name="roleMember" value="${roleMember}">
 </body>
 </html>

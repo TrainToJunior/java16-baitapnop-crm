@@ -7,12 +7,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cybersoft.javabackend.crm.dao.JobDAO;
 import cybersoft.javabackend.crm.dao.StatusDAO;
 import cybersoft.javabackend.crm.dao.TaskDAO;
 import cybersoft.javabackend.crm.dao.UserDAO;
+import cybersoft.javabackend.crm.filter.AuthFilter;
 import cybersoft.javabackend.crm.model.Task;
+import cybersoft.javabackend.crm.model.User;
 import cybersoft.javabackend.crm.util.JspConst;
 import cybersoft.javabackend.crm.util.UrlConst;
 
@@ -36,11 +39,18 @@ public class TaskController extends HttpServlet {
 		super.init();
 	}
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+		HttpSession session = req.getSession();
+		User currentUser = (User) session.getAttribute("currentUser");		
+		req.setAttribute("currentUser", currentUser);	
+		req.setAttribute("currentUserRoleID", currentUser.getRoleID());
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
 		req.setAttribute("listStatus", statusDao.getAll());
 		req.setAttribute("listJob", jobDao.getAll());
+		req.setAttribute("roleAdmin", AuthFilter.ROLE_ADMIN);
+		req.setAttribute("roleLeader", AuthFilter.ROLE_LEADER);
+		req.setAttribute("roleMember", AuthFilter.ROLE_MEMBER);
 		req.setAttribute("message", message);
 		message = "";
 		req.getRequestDispatcher(JspConst.TASK).forward(req, resp);

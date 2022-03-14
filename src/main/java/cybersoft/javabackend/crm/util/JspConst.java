@@ -6,11 +6,12 @@ public class JspConst {
 	public static final String USER = "/views/user/user-layout.jsp";
 	public static final String TASK = "/views/task/task-layout.jsp";
 	public static final String JOB = "/views/job/job-layout.jsp";
-	
+	public static final String ROLE = "/views/role/role-layout.jsp";
 	
 	public static final String BOOTER = "/layout/booter.jsp";
 	public static final String HEADER = "/layout/header.jsp";
 	public static final String LEFT_NAVIGATION = "/layout/left-navigation.jsp";
 	public static final String TOP_NAVIGATION = "/layout/top-navigation.jsp";
+	
 	
 }

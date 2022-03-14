@@ -13,6 +13,7 @@ import cybersoft.javabackend.crm.dao.JobDAO;
 import cybersoft.javabackend.crm.dao.StatusDAO;
 import cybersoft.javabackend.crm.dao.TaskDAO;
 import cybersoft.javabackend.crm.dao.UserDAO;
+import cybersoft.javabackend.crm.filter.AuthFilter;
 import cybersoft.javabackend.crm.model.Job;
 import cybersoft.javabackend.crm.model.User;
 import cybersoft.javabackend.crm.util.JspConst;
@@ -34,12 +35,15 @@ public class JobController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		User currentUser = (User) session.getAttribute("currentUser");
-		
-		req.setAttribute("currentUserID", currentUser.getUserID());
+		User currentUser = (User) session.getAttribute("currentUser");		
+		req.setAttribute("currentUser", currentUser);
+		req.setAttribute("currentUserRoleID", currentUser.getRoleID());
 		req.setAttribute("listJob", jobDao.getAll());
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
+		req.setAttribute("roleAdmin", AuthFilter.ROLE_ADMIN);
+		req.setAttribute("roleLeader", AuthFilter.ROLE_LEADER);
+		req.setAttribute("roleMember", AuthFilter.ROLE_MEMBER);
 		req.setAttribute("message", message);
 		message = "";
 		
@@ -69,8 +73,12 @@ public class JobController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + UrlConst.JOB);
 			break;
 		case UrlConst.JOB_UPDATE:
+			HttpSession session = req.getSession();
+			User currentUser = (User) session.getAttribute("currentUser");
+			
 			job.setJobName(req.getParameter("jobName"));
 			job.setJobDescription(req.getParameter("jobDescription"));
+			job.setUserCreatedID(currentUser.getUserID());
 			job.setStartDate(req.getParameter("startDate"));
 			job.setEndDate(req.getParameter("endDate"));
 			jobDao.updateJob(job,Integer.parseInt(req.getParameter("updateID")));

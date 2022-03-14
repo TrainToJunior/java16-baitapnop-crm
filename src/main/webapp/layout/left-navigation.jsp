@@ -15,16 +15,16 @@
                                     <a class="nav-link active" href="<%=request.getContextPath()+ UrlConst.HOME%>">
                                         Home</a>
                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link active" href="<%=request.getContextPath()+ UrlConst.JOB%>">
+                                 <li class="nav-item" >
+                                    <a id="navJob" class="nav-link active" href="<%=request.getContextPath()+ UrlConst.JOB%>">
                                         Dự án</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="<%=request.getContextPath()+ UrlConst.TASK%>">
+                                    <a  id = "navTask" class="nav-link active" href="<%=request.getContextPath()+ UrlConst.TASK%>">
                                         Công việc</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="<%=request.getContextPath()+ UrlConst.USER%>">
+                                <li class="nav-item" >
+                                    <a id = "navUser" class="nav-link active" href="<%=request.getContextPath()+ UrlConst.USER%>">
                                         Thành viên</a>
                                 </li>
                              
