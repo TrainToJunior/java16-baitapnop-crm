@@ -132,4 +132,8 @@ public class UserDAO {
 		}
 		return user;
 	}
+	
+	public String getMessage() {
+		return null;
+	}
 }

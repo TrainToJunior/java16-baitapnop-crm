@@ -42,56 +42,54 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="task" items="${listTask}" varStatus="loop">
-							<c:if test="${currentUserRoleID != roleMember}">
-									<tr>
-										<th scope="row">${task.taskID}</th>
-										<c:forEach var="job" items="${listJob}" varStatus="loop">
-											<c:if test="${job.jobID == task.jobID}">
+						<c:if test="${currentUser.roleID != roleLeader}">
+						<c:forEach var="job" items="${listJob}" varStatus="loop">
+							<c:forEach var="task" items="${listTask}" varStatus="loop">
+								<c:if test="${job.jobID == task.jobID}">
+									<c:if test="${currentUser.roleID == roleAdmin}">
+										<tr>
+											<th scope="row">${task.taskID}</th>
 												<td>${job.jobName}</td>
-												<c:set var="selectJobID" value="${job.jobID}" />
-											</c:if>
-										</c:forEach>
-										<td>${task.taskName }</td>
-										<td>${task.taskDescription}</td>
-										<c:set var="taskDescription" value="${task.taskDescription}" />
-										<td><c:set var="foundUser" value="false" /> <c:forEach
-												var="user" items="${listUser}" varStatus="loop">
-												<c:if test="${user.userID == task.userID}">
-											${user.fullName}
-											<c:set var="selectUserName" value="${user.fullName}" />
-													<c:set var="selectUserID" value="${user.userID}" />
-													<c:set var="foundUser" value="true" />
-												</c:if>
-											</c:forEach> <c:if test="${foundUser eq 'false'}">
-												<span style="color: red">Chưa có người làm</span>
-
-											</c:if></td>
-										<td>${task.startDate }</td>
-										<td>${task.endDate }</td>
-										<c:forEach var="status" items="${listStatus}" varStatus="loop">
-											<c:if test="${status.statusID == task.statusID}">
-												<td>${status.statusName}</td>
-												<c:set var="selectStatusID" value="${status.statusID}" />
-											</c:if>
-										</c:forEach>
-										<td>
-
-											<button style="float: left" type="button"
-												class="btn btn-secondary btn-sm" data-toggle="modal"
-												data-target="#modal-task-update"
-												data-taskid="${task.taskID}"
-												data-taskname="${task.taskName}"
-												data-taskdescription="${task.taskDescription}"
-												data-startdate="${task.startDate }"
-												data-enddate="${task.endDate}"
-												data-userid="<c:out value = "${selectUserID}"/>"
-												data-jobid="<c:out value = "${selectJobID}"/>"
-												data-statusid="<c:out value = "${selectStatusID}"/>"
-												data-selectuser="<c:out value = "${selectUserName}"/>">
-												<i class="fa fa-pen"></i>
-											</button> 
-											<c:if test="${currentUserRoleID != roleMember}">
+												<c:set var="selectJobID" value="${job.jobID}" />																			
+												<td>${task.taskName }</td>
+												<td>${task.taskDescription}</td>
+												<c:set var="taskDescription" value="${task.taskDescription}" />
+												<td>
+													<c:set var="foundUser" value="false" /> 
+													<c:forEach var="user" items="${listUser}" varStatus="loop">
+														<c:if test="${user.userID == task.userID}">
+															${user.fullName}
+															<c:set var="selectUserName" value="${user.fullName}" />
+															<c:set var="selectUserID" value="${user.userID}" />
+															<c:set var="foundUser" value="true" />
+														</c:if>
+													</c:forEach> <c:if test="${foundUser eq 'false'}">
+														<span style="color: red">Chưa có người làm</span>
+													</c:if>
+												</td>
+												<td>${task.startDate }</td>
+												<td>${task.endDate }</td>
+												<c:forEach var="status" items="${listStatus}" varStatus="loop">
+													<c:if test="${status.statusID == task.statusID}">
+													<td>${status.statusName}</td>
+													<c:set var="selectStatusID" value="${status.statusID}" />
+													</c:if>
+												</c:forEach>
+												<td>
+												<button style="float: left" type="button"
+													class="btn btn-secondary btn-sm" data-toggle="modal"
+													data-target="#modal-task-update"
+													data-taskid="${task.taskID}"
+													data-taskname="${task.taskName}"
+													data-taskdescription="${task.taskDescription}"
+													data-startdate="${task.startDate }"
+													data-enddate="${task.endDate}"
+													data-userid="<c:out value = "${selectUserID}"/>"
+													data-jobid="<c:out value = "${selectJobID}"/>"
+													data-statusid="<c:out value = "${selectStatusID}"/>"
+													data-selectuser="<c:out value = "${selectUserName}"/>">
+													<i class="fa fa-pen"></i>
+												</button> 
 												<form
 													action="<%=request.getContextPath() + UrlConst.TASK_DELETE%>"
 													method="post" style="float: left">
@@ -101,82 +99,143 @@
 														<i class="fa fa-trash"></i>
 													</button>
 												</form>
-											</c:if>
-										</td>
-									</tr>
-								</c:if>
-							<c:if test="${currentUserRoleID == roleMember}">
-								<c:if test="${currentUser.userID == task.userID}">
-									<tr>
-										<th scope="row">${task.taskID}</th>
-										<c:forEach var="job" items="${listJob}" varStatus="loop">
-											<c:if test="${job.jobID == task.jobID}">
-												<td>${job.jobName}</td>
-												<c:set var="selectJobID" value="${job.jobID}" />
-											</c:if>
-										</c:forEach>
-										<td>${task.taskName }</td>
-										<td>${task.taskDescription}</td>
-										<c:set var="taskDescription" value="${task.taskDescription}" />
-										<td><c:set var="foundUser" value="false" /> <c:forEach
-												var="user" items="${listUser}" varStatus="loop">
-												<c:if test="${user.userID == task.userID}">
-											${user.fullName}
-											<c:set var="selectUserName" value="${user.fullName}" />
-													<c:set var="selectUserID" value="${user.userID}" />
-													<c:set var="foundUser" value="true" />
+											</td>
+										</tr>
+									</c:if>
+									<c:if test="${currentUser.roleID == roleMember}">
+										<c:if test="${currentUser.userID == task.userID}">
+											<tr>
+												<th scope="row">${task.taskID}</th>
+													<td>${job.jobName}</td>
+													<c:set var="selectJobID" value="${job.jobID}" />																			
+													<td>${task.taskName }</td>
+													<td>${task.taskDescription}</td>
+													<c:set var="taskDescription" value="${task.taskDescription}" />
+													<td>
+														<c:set var="foundUser" value="false" /> 
+														<c:forEach var="user" items="${listUser}" varStatus="loop">
+															<c:if test="${user.userID == task.userID}">
+																${user.fullName}
+																<c:set var="selectUserName" value="${user.fullName}" />
+																<c:set var="selectUserID" value="${user.userID}" />
+																<c:set var="foundUser" value="true" />
+															</c:if>
+														</c:forEach> 
+														<c:if test="${foundUser eq 'false'}">
+														<span style="color: red">Chưa có người làm</span>
+														</c:if>
+												</td>
+												<td>${task.startDate }</td>
+												<td>${task.endDate }</td>
+												<c:forEach var="status" items="${listStatus}" varStatus="loop">
+													<c:if test="${status.statusID == task.statusID}">
+													<td>${status.statusName}</td>
+													<c:set var="selectStatusID" value="${status.statusID}" />
+													</c:if>
+												</c:forEach>
+												<td>
+												<button style="float: left" type="button"
+													class="btn btn-secondary btn-sm" data-toggle="modal"
+													data-target="#modal-task-update"
+													data-taskid="${task.taskID}"
+													data-taskname="${task.taskName}"
+													data-taskdescription="${task.taskDescription}"
+													data-startdate="${task.startDate }"
+													data-enddate="${task.endDate}"
+													data-userid="<c:out value = "${selectUserID}"/>"
+													data-jobid="<c:out value = "${selectJobID}"/>"
+													data-statusid="<c:out value = "${selectStatusID}"/>"
+													data-selectuser="<c:out value = "${selectUserName}"/>">
+													<i class="fa fa-pen"></i>
+												</button> 
+												<c:if test="${currentUser.roleID != roleMember}">
+													<form
+														action="<%=request.getContextPath() + UrlConst.TASK_DELETE%>"
+														method="post" style="float: left">
+														<input type="hidden" id="deleteID" name="deleteID"
+															value="${task.taskID}">
+														<button type="submit" class="btn btn-primary btn-sm">
+															<i class="fa fa-trash"></i>
+														</button>
+													</form>
 												</c:if>
-											</c:forEach> <c:if test="${foundUser eq 'false'}">
-												<span style="color: red">Chưa có người làm</span>
-
-											</c:if></td>
-										<td>${task.startDate }</td>
-										<td>${task.endDate }</td>
-										<c:forEach var="status" items="${listStatus}" varStatus="loop">
-											<c:if test="${status.statusID == task.statusID}">
-												<td>${status.statusName}</td>
-												<c:set var="selectStatusID" value="${status.statusID}" />
-											</c:if>
-										</c:forEach>
-										<td>
-
-											<button style="float: left" type="button"
-												class="btn btn-secondary btn-sm" data-toggle="modal"
-												data-target="#modal-task-update"
-												data-taskid="${task.taskID}"
-												data-taskname="${task.taskName}"
-												data-taskdescription="${task.taskDescription}"
-												data-startdate="${task.startDate }"
-												data-enddate="${task.endDate}"
-												data-userid="<c:out value = "${selectUserID}"/>"
-												data-jobid="<c:out value = "${selectJobID}"/>"
-												data-statusid="<c:out value = "${selectStatusID}"/>"
-												data-selectuser="<c:out value = "${selectUserName}"/>">
-												<i class="fa fa-pen"></i>
-											</button> 
-											<c:if test="${currentUserRoleID != roleMember}">
-												<form
-													action="<%=request.getContextPath() + UrlConst.TASK_DELETE%>"
-													method="post" style="float: left">
-													<input type="hidden" id="deleteID" name="deleteID"
-														value="${task.taskID}">
-													<button type="submit" class="btn btn-primary btn-sm">
-														<i class="fa fa-trash"></i>
-													</button>
-												</form>
-											</c:if>
-										</td>
-									</tr>
+											</td>
+										</tr>
+									</c:if>
+									</c:if>
 								</c:if>
-							</c:if>
+							</c:forEach>
 						</c:forEach>
+						</c:if>
+						<c:if test="${currentUser.roleID == roleLeader}">
+							<c:forEach var="job" items="${listJobCurrentUser}" varStatus="loop">
+								<c:forEach var="task" items="${listTask}" varStatus="loop">
+									<c:if test="${job.jobID == task.jobID}">			
+										<tr>
+											<th scope="row">${task.taskID}</th>
+												<td>${job.jobName}</td>
+												<c:set var="selectJobID" value="${job.jobID}" />																			
+												<td>${task.taskName }</td>
+												<td>${task.taskDescription}</td>
+												<c:set var="taskDescription" value="${task.taskDescription}" />
+												<td>
+													<c:set var="foundUser" value="false" /> 
+													<c:forEach var="user" items="${listUser}" varStatus="loop">
+														<c:if test="${user.userID == task.userID}">
+															${user.fullName}
+															<c:set var="selectUserName" value="${user.fullName}" />
+															<c:set var="selectUserID" value="${user.userID}" />
+															<c:set var="foundUser" value="true" />
+														</c:if>
+													</c:forEach> <c:if test="${foundUser eq 'false'}">
+														<span style="color: red">Chưa có người làm</span>
+													</c:if>
+												</td>
+												<td>${task.startDate }</td>
+												<td	>${task.endDate }</td>
+														<c:forEach var="status" items="${listStatus}" varStatus="loop">
+															<c:if test="${status.statusID == task.statusID}">
+																<td>${status.statusName}</td>
+																<c:set var="selectStatusID" value="${status.statusID}" />
+															</c:if>
+														</c:forEach>
+													<td>
+													<button style="float: left" type="button"
+														class="btn btn-secondary btn-sm" data-toggle="modal"
+														data-target="#modal-task-update"
+														data-taskid="${task.taskID}"
+														data-taskname="${task.taskName}"
+														data-taskdescription="${task.taskDescription}"
+														data-startdate="${task.startDate }"
+														data-enddate="${task.endDate}"
+														data-userid="<c:out value = "${selectUserID}"/>"
+														data-jobid="<c:out value = "${selectJobID}"/>"
+														data-statusid="<c:out value = "${selectStatusID}"/>"
+														data-selectuser="<c:out value = "${selectUserName}"/>">
+														<i class="fa fa-pen"></i>
+													</button> 
+													<form
+														action="<%=request.getContextPath() + UrlConst.TASK_DELETE%>"
+														method="post" style="float: left">
+														<input type="hidden" id="deleteID" name="deleteID"
+															value="${task.taskID}">
+														<button type="submit" class="btn btn-primary btn-sm">
+															<i class="fa fa-trash"></i>
+														</button>
+													</form>
+												</td>
+											</tr>
+										</c:if>
+								</c:forEach>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 	<input type="hidden" id="message" name="message" value="${message}">
-		<input type="hidden" id="currentUserRoleID" name="currentUserRoleID" value="${currentUser.roleID}">
+	<input type="hidden" id="currentUserRoleID" name="currentUserRoleID" value="${currentUser.roleID}">
 	<input type="hidden" id="roleAdmin" name="roleAdmin" value="${roleAdmin}">
 	<input type="hidden" id="roleLeader" name="roleLeader" value="${roleLeader}">
 	<input type="hidden" id="roleMember" name="roleMember" value="${roleMember}">

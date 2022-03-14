@@ -44,6 +44,7 @@ public class TaskController extends HttpServlet {
 		User currentUser = (User) session.getAttribute("currentUser");		
 		req.setAttribute("currentUser", currentUser);	
 		req.setAttribute("currentUserRoleID", currentUser.getRoleID());
+		req.setAttribute("listJobCurrentUser", jobDao.getAllJobCurrentUser(currentUser.getUserID()));
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
 		req.setAttribute("listStatus", statusDao.getAll());

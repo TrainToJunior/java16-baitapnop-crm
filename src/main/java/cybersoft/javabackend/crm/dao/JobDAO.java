@@ -87,4 +87,31 @@ public class JobDAO {
 		}
 		return 0;
 	}
+	
+	public ArrayList<Job> getAllJobCurrentUser(int currentUserID){
+		ArrayList<Job> projects = new ArrayList<>();
+		String query = "SELECT * FROM crm_app.jobs WHERE user_created_id = ?";
+		
+		try(Connection conn = JDBCConnection.getConnection()){
+			PreparedStatement stm = conn.prepareStatement(query);
+			stm.setInt(1, currentUserID);
+			ResultSet result = stm.executeQuery();
+			
+			while(result.next()) {
+				Job job = new Job();
+				job.setJobID(result.getInt("id"));
+				job.setJobName(result.getString("job_name"));
+				job.setJobDescription(result.getString("job_description"));
+				job.setUserCreatedID(result.getInt("user_created_id"));
+				job.setStartDate(result.getString("start_date"));
+				job.setEndDate(result.getString("end_date"));
+				projects.add(job);
+			}
+	
+		}catch (Exception e) {
+			
+		}
+	return projects;
+	}
+	
 }

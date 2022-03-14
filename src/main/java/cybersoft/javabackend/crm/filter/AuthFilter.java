@@ -22,6 +22,7 @@ public class AuthFilter implements Filter {
 	public static final int ROLE_ADMIN = 1;
 	public static final int ROLE_LEADER = 2;
 	public static final int ROLE_MEMBER = 3;
+	public static final int SUCCESS_DAO_CODE = 1;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

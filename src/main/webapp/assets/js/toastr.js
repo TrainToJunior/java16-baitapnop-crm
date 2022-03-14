@@ -126,6 +126,7 @@
       hideMethod: void 0 !== element.data('toastr-hide-method') ? element.data('toastr-hide-method') : 'fadeOut'
     };
     toastr[type](message, title, options);
+	toastr.error(msg, title);
   });
 })();
 

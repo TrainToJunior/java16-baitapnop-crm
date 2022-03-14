@@ -38,6 +38,7 @@ public class JobController extends HttpServlet {
 		User currentUser = (User) session.getAttribute("currentUser");		
 		req.setAttribute("currentUser", currentUser);
 		req.setAttribute("currentUserRoleID", currentUser.getRoleID());
+		req.setAttribute("listJobCurrentUser", jobDao.getAllJobCurrentUser(currentUser.getUserID()));
 		req.setAttribute("listJob", jobDao.getAll());
 		req.setAttribute("listTask", taskDao.getAll());
 		req.setAttribute("listUser", userDao.getAll());
@@ -53,6 +54,8 @@ public class JobController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		User currentUser = (User) session.getAttribute("currentUser");	
 		String path = req.getServletPath();
 		Job job = new Job();
 		switch (path) {
@@ -65,7 +68,7 @@ public class JobController extends HttpServlet {
 		case UrlConst.JOB_INSERT:
 			job.setJobName(req.getParameter("jobName"));
 			job.setJobDescription(req.getParameter("jobDescription"));
-			job.setUserCreatedID(Integer.parseInt(req.getParameter("userCreatedID")));
+			job.setUserCreatedID(currentUser.getUserID());
 			job.setStartDate(req.getParameter("startDate"));
 			job.setEndDate(req.getParameter("endDate"));
 			jobDao.insertJob(job);
@@ -73,8 +76,6 @@ public class JobController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + UrlConst.JOB);
 			break;
 		case UrlConst.JOB_UPDATE:
-			HttpSession session = req.getSession();
-			User currentUser = (User) session.getAttribute("currentUser");
 			
 			job.setJobName(req.getParameter("jobName"));
 			job.setJobDescription(req.getParameter("jobDescription"));

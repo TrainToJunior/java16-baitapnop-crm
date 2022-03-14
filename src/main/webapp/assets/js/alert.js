@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	if ($('#message').length > 0 && "" !== $('#message').val()) {
-		toastr.success($('#message').val())
+		if($('#error').length > 0 && "" !== $('#error').val()){
+			toastr.warning($('#message').val())
+		}else{
+			toastr.success($('#message').val())			
+		}
 	}
 });
 $(document).ready(function() {

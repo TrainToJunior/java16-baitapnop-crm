@@ -84,6 +84,7 @@
 		</div>
 	</div>
 	<input type="hidden" id="message" name="message" value="${message}">
+	<input type="hidden" id="error" name="error" value="${error}">
 	<input type="hidden" id="currentUserRoleID" name="currentUserRoleID" value="${currentUser.roleID}">
 	<input type="hidden" id="roleAdmin" name="roleAdmin" value="${roleAdmin}">
 	<input type="hidden" id="roleLeader" name="roleLeader" value="${roleLeader}">

@@ -210,16 +210,22 @@
 									name="selectUser" required >					
 												 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
-											<c:if test=""></c:if>
-											<option value="${user.userID}">${user.fullName}</option>
+											<option value="${user.userID}" class="${user.roleID}">${user.fullName}</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group job-options">
 								<label for="selectJob">Dự án: </label> <select id="selectJob"
 									name="selectJob"  required>									 
-									<c:forEach var="job" items="${listJob}" varStatus="loop">		
+									<c:forEach var="job" items="${listJob}" varStatus="loop">	
+											<c:if test="${roleLeader  == currentUser.roleID}">	
+												<c:if test="${job.userCreatedID == currentUser.userID}">
+													<option value="${job.jobID}">${job.jobName}</option>
+												</c:if>
+											</c:if>
+											<c:if test="${roleLeader != currentUser.roleID}">
 											<option value="${job.jobID}">${job.jobName}</option>
+											</c:if>
 									</c:forEach>
 								</select>
 							</div>
@@ -281,28 +287,33 @@
 									class="form-control" type="date" name="endDate" id="endDate" required=""
 									placeholder="" />
 							</div>
-							<div class="form-group">
+							<div class="form-group user-options">
 								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
-									name="selectUser" required >								 
+										name="selectUser" required >																 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
-											<option value="${user.userID}">${user.fullName}</option>
+											<option value="${user.userID}" class="${user.roleID}">${user.fullName}</option>
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group">
+							<div class="form-group job-options">
 								<label for="selectJob">Dự án: </label> <select id="selectJob"
-									name="selectJob" required >									 
-									<c:forEach var="job" items="${listJob}" varStatus="loop">
-											
+									name="selectJob"  required>									 
+									<c:forEach var="job" items="${listJob}" varStatus="loop">	
+											<c:if test="${roleLeader  == currentUser.roleID}">	
+												<c:if test="${job.userCreatedID == currentUser.userID}">
+													<option value="${job.jobID}">${job.jobName}</option>
+												</c:if>
+											</c:if>
+											<c:if test="${roleLeader != currentUser.roleID}">
 											<option value="${job.jobID}">${job.jobName}</option>
+											</c:if>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="selectStatus">Trạng thái: </label> <select id="selectStatus"
 									name="selectStatus" required >									 
-									<c:forEach var="status" items="${listStatus}" varStatus="loop">
-											
+									<c:forEach var="status" items="${listStatus}" varStatus="loop">								
 											<option value="${status.statusID}">${status.statusName}</option>
 									</c:forEach>
 								</select>

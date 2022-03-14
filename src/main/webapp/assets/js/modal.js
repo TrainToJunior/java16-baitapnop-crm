@@ -29,6 +29,7 @@ $(document).on('shown.bs.modal','#modal-task-update', function (event) {
 var button = $(event.relatedTarget)
 	var currentUserRoleID = $('#currentUserRoleID').val();
 	var roleMember = $('#roleMember').val();
+	var roleLeader = $('#roleLeader').val();
 	var taskID = button.data('taskid')
 	var taskName = button.data('taskname')
 	var taskDescription = button.data('taskdescription')
@@ -74,12 +75,21 @@ var modal = $(this)
 		$('.job-options option:not(:selected)').attr('disabled', true)
 	}else{
 		$('.form-group input').attr('readonly', false);
-		$('.user-options option)').attr('disabled', false);
+		$('.user-options option').attr('disabled', false);
 		$('.job-options option').attr('disabled', false);
 	}
+	if(currentUserRoleID == roleLeader){
+		$('.user-options option:not(.3)').attr('disabled', true)			
+	}	
 });
 
 $(document).on('shown.bs.modal','#modal-task-insert', function () {
+	var currentUserRoleID = $('#currentUserRoleID').val();
+	var roleMember = $('#roleMember').val();
+	var roleLeader = $('#roleLeader').val();
+	var userID = button.data('userid')
+	var jobID = button.data('jobid')
+	var statusID = button.data('statusid')
 	var now = new Date();
     var month = (now.getMonth() + 1);               
     var day = now.getDate();
@@ -97,6 +107,33 @@ $(document).on('shown.bs.modal','#modal-task-insert', function () {
 var modal = $(this)
 	modal.find('#startDate').val(today)
 	modal.find('#endDate').val(endDate)
+	
+	$('.user-options option')
+     .removeAttr('selected')
+     .filter('[value="'+ userID +'"]')
+         .attr('selected', true)
+	$('.job-options option')
+     .removeAttr('selected')
+     .filter('[value="'+ jobID +'"]')
+         .attr('selected', true)
+	$('.status-options option')
+     .removeAttr('selected')
+     .filter('[value="'+ statusID +'"]')
+         .attr('selected', true)
+	
+	
+	if (currentUserRoleID == roleMember) {
+		$('.form-group input').attr('readonly', true)
+		$('.user-options option:not(:selected)').attr('disabled', true)
+		$('.job-options option:not(:selected)').attr('disabled', true)
+	}else{
+		$('.form-group input').attr('readonly', false);
+		$('.user-options option').attr('disabled', false);
+		$('.job-options option').attr('disabled', false);
+	}
+	if(currentUserRoleID == roleLeader){
+		$('.user-options option:not(.3)').attr('disabled', true)			
+	}	
 });
 
 $(document).on('shown.bs.modal','#modal-job-update', function (event) {
