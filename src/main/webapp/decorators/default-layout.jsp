@@ -206,8 +206,8 @@
 									placeholder=""  value=""/>
 							</div>
 							<div class="form-group user-options">
-								<label for="selectUser">Người thực hiện: </label> <select id="selectUser"
-									name="selectUser" required >									 
+								<label for="selectUserTaskUpdate">Người thực hiện: </label> <select id="selectUserTaskUpdate"
+									name="selectUserTaskUpdate" required >									 
 									<c:forEach var="user" items="${listUser}" varStatus="loop">
 											<option value="${user.userID}" class="${user.roleID}">${user.fullName}</option>
 									</c:forEach>

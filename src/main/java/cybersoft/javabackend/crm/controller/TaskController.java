@@ -87,7 +87,7 @@ public class TaskController extends HttpServlet {
 			task.setTaskDescription(req.getParameter("taskDescription"));
 			task.setStartDate(req.getParameter("startDate"));
 			task.setEndDate(req.getParameter("endDate"));
-			task.setUserID(Integer.parseInt(req.getParameter("selectUser")));
+			task.setUserID(Integer.parseInt(req.getParameter("selectUserTaskUpdate")));
 			task.setJobID(Integer.parseInt(req.getParameter("selectJob")));
 			task.setStatusID(Integer.parseInt(req.getParameter("selectStatus")));
 			taskDao.updateTask(task,Integer.parseInt(req.getParameter("updateID")) );

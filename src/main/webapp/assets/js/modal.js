@@ -84,9 +84,6 @@ $(document).on('shown.bs.modal','#modal-task-insert', function () {
 	var currentUserRoleID = $('#currentUserRoleID').val();
 	var roleMember = $('#roleMember').val();
 	var roleLeader = $('#roleLeader').val();
-	var userID = button.data('userid')
-	var jobID = button.data('jobid')
-	var statusID = button.data('statusid')
 	var now = new Date();
     var month = (now.getMonth() + 1);               
     var day = now.getDate();
@@ -113,10 +110,6 @@ var modal = $(this)
      .removeAttr('selected')
      .filter('[value="'+ jobID +'"]')
          .attr('selected', true)
-	$('.status-options option')
-     .removeAttr('selected')
-     .filter('[value="'+ statusID +'"]')
-         .attr('selected', true)
 	
 	
 	if (currentUserRoleID == roleMember) {
@@ -129,7 +122,9 @@ var modal = $(this)
 		$('.job-options option').attr('disabled', false);
 	}
 	if(currentUserRoleID == roleLeader){
-		$('.user-options option:not(.3)').attr('disabled', true)			
+		$('.user-options option:not(.3)').attr('disabled', true)
+		$('.user-options option:not(:disabled)').attr('selected', true)
+		console.log('chay role')	
 	}	
 });
 
