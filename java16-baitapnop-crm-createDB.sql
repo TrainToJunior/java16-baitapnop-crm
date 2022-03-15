@@ -49,6 +49,7 @@ create table if not exists status(
 );
 
 alter table users add foreign key (role_id) references roles (id) on delete cascade;
+alter table tasks add foreign key (user_id) references users (id) ON UPDATE CASCADE;
 alter table tasks add foreign key (job_id) references jobs (id) on delete cascade;
 alter table tasks add foreign key (status_id) references status (id) on delete cascade;
 
@@ -96,14 +97,15 @@ values ('Module-All','Quản lý Tất cả','1',now(),DATE_ADD(CURRENT_TIMESTAM
 
 
 insert into tasks (task_name,task_description, start_date,end_date,user_id,status_id,job_id)
-values ('Add insert object','add nút thêm người dùng',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'1','1','1');
+values ('Add insert object','add nút thêm người dùng',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'3','1','1');
 insert into tasks (task_name,task_description, start_date,end_date,user_id,status_id,job_id)
-values ('Add delete object','add nút xóa công việc',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'1','3','2');
+values ('Add delete object','add nút xóa công việc',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'4','3','2');
 insert into tasks (task_name,task_description, start_date,end_date,user_id,status_id,job_id)
-values ('Add update object','add nút cập nhật dự án',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'1','2','5');
+values ('Add update object','add nút cập nhật dự án',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'5','2','5');
 insert into tasks (task_name,task_description, start_date,end_date,user_id,status_id,job_id)
-values ('Test role','kiểm tra phân quyền',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'1','1','3');
+values ('Test role','kiểm tra phân quyền',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'4','1','3');
 insert into tasks (task_name,task_description, start_date,end_date,user_id,status_id,job_id)
-values ('Add status','add các trạng thái',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'1','1','4');
-insert into tasks (task_name,task_description, start_date,end_date,status_id,job_id)
-values ('Fix bug','Sửa các lỗi',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'1','4');
+values ('Add status','add các trạng thái',now(),DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 WEEK),'3','1','4');
+
+
+

@@ -76,19 +76,25 @@ public class UserController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			break;
 		case UrlConst.USER_INSERT:
+			
 			user.setFullName(req.getParameter("fullName"));
 			user.setPhoneNumber(req.getParameter("phoneNumber"));
 			user.setAddress(req.getParameter("address"));
 			user.setEmail(req.getParameter("email"));
 			user.setUserPassword(req.getParameter("userPassword"));
 			user.setRoleID(Integer.parseInt(req.getParameter("selectRole")));
-			if(userDao.insertUser(user) == AuthFilter.SUCCESS_DAO_CODE) {
-				message = "Thêm thành công";			
-				resp.sendRedirect(req.getContextPath() + UrlConst.USER);
+			if(userDao.getEmailExists(user.getEmail()) != null) {
+				message = "Thêm thất bại, email đã tồn tại";
+				error = "true";	
 			}else {
-				message = "Thêm thất bại";
-				resp.sendRedirect(req.getContextPath() + UrlConst.USER);
+				if(userDao.insertUser(user) == AuthFilter.SUCCESS_DAO_CODE) {
+					message = "Thêm thành công";							
+				}else {
+					message = "Thêm thất bại";
+					error = "true";	
+				}			
 			}
+			resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			
 			break;
 		case UrlConst.USER_UPDATE:
@@ -104,6 +110,7 @@ public class UserController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + UrlConst.USER);			
 			}else {
 				message = "Cập nhật thất bại";
+				error = "true";	
 				resp.sendRedirect(req.getContextPath() + UrlConst.USER);
 			}
 			break;
