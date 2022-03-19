@@ -68,8 +68,8 @@ var modal = $(this)
 
 	if (currentUserRoleID == roleMember) {
 		$('.form-group input').attr('readonly', true)
-		$('.user-options option:not(:selected)').attr('disabled', true)
-		$('.job-options option:not(:selected)').attr('disabled', true)
+		$('.user-options option:not(:selected)').remove()
+		$('.job-options option:not(:selected)').remove()
 	}else{
 		$('.form-group input').attr('readonly', false);
 		$('.user-options option').attr('disabled', false);
